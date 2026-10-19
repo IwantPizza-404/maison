@@ -4,8 +4,9 @@ from pathlib import Path
 
 import environ
 from celery.schedules import crontab
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
+from django.utils.translation import pgettext_lazy
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -290,6 +291,13 @@ UNFOLD = {
                         "icon": "receipt_long",
                         "link": reverse_lazy("admin:orders_order_changelist"),
                         "badge": "apps.orders.admin.new_orders_badge",
+                        "active": "apps.orders.admin.is_orders_menu_active",
+                    },
+                    {
+                        "title": _("Order board"),
+                        "icon": "view_kanban",
+                        "link": reverse_lazy("admin:orders_order_board"),
+                        "active": "apps.orders.admin.is_board_menu_active",
                     },
                     {
                         "title": _("Customers"),
@@ -336,4 +344,32 @@ UNFOLD = {
             },
         ],
     },
+    # Вкладки над списком заказов: доска и заказы по статусам
+    "TABS": [
+        {
+            "models": ["orders.order"],
+            "items": [
+                {"title": _("Board"), "link": reverse_lazy("admin:orders_order_board")},
+                {
+                    "title": _("All orders"),
+                    "link": reverse_lazy("admin:orders_order_changelist"),
+                    "active": "apps.orders.admin.is_all_orders_tab",
+                },
+                *(
+                    {
+                        "title": title,
+                        "link": lambda request, status=status: (
+                            f"{reverse('admin:orders_order_changelist')}?status__exact={status}"
+                        ),
+                    }
+                    for status, title in (
+                        ("new", pgettext_lazy("orders tab", "New")),
+                        ("confirmed", pgettext_lazy("orders tab", "Confirmed")),
+                        ("paid", pgettext_lazy("orders tab", "Paid")),
+                        ("shipped", pgettext_lazy("orders tab", "Shipped")),
+                    )
+                ),
+            ],
+        },
+    ],
 }

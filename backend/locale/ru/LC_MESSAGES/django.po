@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-12 00:01+0500\n"
+"POT-Creation-Date: 2026-10-16 23:04+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,11 +39,11 @@ msgid "Reply"
 msgstr "Ответ"
 
 #: apps/accounts/admin.py:139 apps/accounts/models.py:293
-#: apps/orders/admin.py:175 apps/orders/models.py:93
+#: apps/orders/admin.py:310 apps/orders/models.py:93
 msgid "status"
 msgstr "статус"
 
-#: apps/accounts/apps.py:8 config/settings/base.py:295
+#: apps/accounts/apps.py:8 config/settings/base.py:301
 msgid "Customers"
 msgstr "Покупатели"
 
@@ -447,7 +447,7 @@ msgstr "Снять с публикации"
 msgid "Unpublished: %d"
 msgstr "Снято с публикации: %d"
 
-#: apps/catalog/apps.py:8 config/settings/base.py:236
+#: apps/catalog/apps.py:8 config/settings/base.py:237
 msgid "Catalog"
 msgstr "Каталог"
 
@@ -565,7 +565,7 @@ msgstr "Унисекс"
 msgid "Model reference"
 msgstr "Артикул модели"
 
-#: apps/catalog/models.py:143 apps/orders/admin.py:28 apps/orders/models.py:34
+#: apps/catalog/models.py:143 apps/orders/admin.py:45 apps/orders/models.py:34
 #: apps/orders/models.py:196
 msgid "price, USD"
 msgstr "цена, USD"
@@ -732,7 +732,7 @@ msgstr "Соцсети"
 msgid "Announcement bar"
 msgstr "Строка объявления"
 
-#: apps/content/admin.py:73 config/settings/base.py:239
+#: apps/content/admin.py:73 config/settings/base.py:240
 msgid "Products"
 msgstr "Товары"
 
@@ -740,7 +740,7 @@ msgstr "Товары"
 msgid "Banner"
 msgstr "Баннер"
 
-#: apps/content/apps.py:8 config/settings/base.py:261
+#: apps/content/apps.py:8 config/settings/base.py:262
 msgid "Content"
 msgstr "Контент"
 
@@ -796,7 +796,7 @@ msgstr "ссылка объявления"
 msgid "site settings"
 msgstr "настройки сайта"
 
-#: apps/content/models.py:59 config/settings/base.py:279
+#: apps/content/models.py:59 config/settings/base.py:280
 msgid "Site settings"
 msgstr "Настройки сайта"
 
@@ -989,7 +989,7 @@ msgstr "вопрос"
 msgid "answer"
 msgstr "ответ"
 
-#: apps/content/models.py:230 config/settings/base.py:274
+#: apps/content/models.py:230 config/settings/base.py:275
 msgid "FAQ"
 msgstr "Частые вопросы"
 
@@ -1056,39 +1056,84 @@ msgstr "курс валюты"
 msgid "exchange rates"
 msgstr "курсы валют"
 
-#: apps/orders/admin.py:30
+#: apps/orders/admin.py:47
 msgid "by manager"
 msgstr "рассчитывает менеджер"
 
-#: apps/orders/admin.py:139
+#: apps/orders/admin.py:185
 msgid "Customer"
 msgstr "Покупатель"
 
-#: apps/orders/admin.py:150
+#: apps/orders/admin.py:196
 msgid "Delivery"
 msgstr "Доставка"
 
-#: apps/orders/admin.py:153
+#: apps/orders/admin.py:199
 msgid "Amount"
 msgstr "Сумма"
 
-#: apps/orders/admin.py:179
+#: apps/orders/admin.py:210
+msgid "Confirm"
+msgstr "Подтвердить"
+
+#: apps/orders/admin.py:212
+msgid "Payment received"
+msgstr "Оплата получена"
+
+#: apps/orders/admin.py:214
+msgid "Ship"
+msgstr "Отправить"
+
+#: apps/orders/admin.py:216
+msgid "Complete"
+msgstr "Завершить"
+
+#: apps/orders/admin.py:220
+msgid "Cancel order"
+msgstr "Отменить заказ"
+
+#: apps/orders/admin.py:222 apps/orders/admin.py:284
+msgid "Cancel the order? Items in stock will be returned to the warehouse."
+msgstr "Отменить заказ? Товары из наличия вернутся на склад."
+
+#: apps/orders/admin.py:234
+#, python-format
+msgid "Order %(number)s: %(status)s"
+msgstr "Заказ %(number)s: %(status)s"
+
+#: apps/orders/admin.py:272 config/settings/base.py:296
+msgid "Order board"
+msgstr "Доска заказов"
+
+#: apps/orders/admin.py:282
+msgid "BTS tracking number (can be left empty):"
+msgstr "Трек-номер BTS (можно оставить пустым):"
+
+#: apps/orders/admin.py:286
+msgid "Could not change the status."
+msgstr "Не удалось изменить статус."
+
+#: apps/orders/admin.py:297
+msgid "Unknown status."
+msgstr "Неизвестный статус."
+
+#: apps/orders/admin.py:314
 msgid "total"
 msgstr "итого"
 
-#: apps/orders/admin.py:183 apps/orders/models.py:128
+#: apps/orders/admin.py:318 apps/orders/models.py:128
 msgid "display currency"
 msgstr "валюта покупателя"
 
-#: apps/orders/admin.py:189
+#: apps/orders/admin.py:324
 msgid "write to customer"
 msgstr "написать покупателю"
 
-#: apps/orders/admin.py:196
+#: apps/orders/admin.py:331
 msgid "Call"
 msgstr "Позвонить"
 
-#: apps/orders/apps.py:8 config/settings/base.py:289
+#: apps/orders/apps.py:8 config/settings/base.py:290
 msgid "Orders"
 msgstr "Заказы"
 
@@ -1231,71 +1276,112 @@ msgstr "Этот способ доставки недоступен для вы�
 msgid "Some items in the cart have changed. Please review the cart."
 msgstr "Некоторые товары в корзине изменились. Проверьте корзину."
 
-#: apps/orders/services.py:217
+#: apps/orders/services.py:219
 #, python-format
 msgid "Cannot change status from “%(from)s” to “%(to)s”."
 msgstr "Нельзя изменить статус с «%(from)s» на «%(to)s»."
 
-#: config/settings/base.py:120
+#: apps/orders/templates/admin/orders/order/board.html:50
+msgid ""
+"Drag a card to the next column to change the order status. Click the number "
+"to open the order."
+msgstr ""
+"Перетащите карточку в следующую колонку, чтобы сменить статус заказа. Номер "
+"— ссылка на заказ."
+
+#: apps/orders/templates/admin/orders/order/board.html:52
+#, python-format
+msgid "Completed and cancelled — for the last %(days)s days."
+msgstr "Завершённые и отменённые — за последние %(days)s дн."
+
+#: config/settings/base.py:121
 msgid "English"
 msgstr "Английский"
 
-#: config/settings/base.py:121
+#: config/settings/base.py:122
 msgid "Uzbek"
 msgstr "Узбекский"
 
-#: config/settings/base.py:122
+#: config/settings/base.py:123
 msgid "Russian"
 msgstr "Русский"
 
-#: config/settings/base.py:244
+#: config/settings/base.py:245
 msgid "Brands"
 msgstr "Бренды"
 
-#: config/settings/base.py:249
+#: config/settings/base.py:250
 msgid "Categories"
 msgstr "Категории"
 
-#: config/settings/base.py:254
+#: config/settings/base.py:255
 msgid "Specification options"
 msgstr "Справочник характеристик"
 
-#: config/settings/base.py:264
+#: config/settings/base.py:265
 msgid "Home page"
 msgstr "Главная страница"
 
-#: config/settings/base.py:269
+#: config/settings/base.py:270
 msgid "Pages"
 msgstr "Страницы"
 
-#: config/settings/base.py:286
+#: config/settings/base.py:287
 msgid "Sales"
 msgstr "Продажи"
 
-#: config/settings/base.py:300
+#: config/settings/base.py:306
 msgid "Watch requests"
 msgstr "Заявки на поиск часов"
 
-#: config/settings/base.py:308
+#: config/settings/base.py:314
 msgid "Settings"
 msgstr "Настройки"
 
-#: config/settings/base.py:311
+#: config/settings/base.py:317
 msgid "Delivery methods"
 msgstr "Способы доставки"
 
-#: config/settings/base.py:316
+#: config/settings/base.py:322
 msgid "Exchange rates"
 msgstr "Курсы валют"
 
-#: config/settings/base.py:323
+#: config/settings/base.py:329
 msgid "Users & access"
 msgstr "Пользователи и доступ"
 
-#: config/settings/base.py:326
+#: config/settings/base.py:332
 msgid "Users"
 msgstr "Пользователи"
 
-#: config/settings/base.py:331
+#: config/settings/base.py:337
 msgid "Groups"
 msgstr "Группы"
+
+#: config/settings/base.py:350
+msgid "Board"
+msgstr "Доска"
+
+#: config/settings/base.py:352
+msgid "All orders"
+msgstr "Все заказы"
+
+#: config/settings/base.py:364
+msgctxt "orders tab"
+msgid "New"
+msgstr "Новые"
+
+#: config/settings/base.py:365
+msgctxt "orders tab"
+msgid "Confirmed"
+msgstr "Подтверждённые"
+
+#: config/settings/base.py:366
+msgctxt "orders tab"
+msgid "Paid"
+msgstr "Оплаченные"
+
+#: config/settings/base.py:367
+msgctxt "orders tab"
+msgid "Shipped"
+msgstr "Отправленные"

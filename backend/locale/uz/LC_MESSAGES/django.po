@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-12 00:01+0500\n"
+"POT-Creation-Date: 2026-10-16 23:04+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,11 +39,11 @@ msgid "Reply"
 msgstr "Javob"
 
 #: apps/accounts/admin.py:139 apps/accounts/models.py:293
-#: apps/orders/admin.py:175 apps/orders/models.py:93
+#: apps/orders/admin.py:310 apps/orders/models.py:93
 msgid "status"
 msgstr "holat"
 
-#: apps/accounts/apps.py:8 config/settings/base.py:295
+#: apps/accounts/apps.py:8 config/settings/base.py:301
 msgid "Customers"
 msgstr "Xaridorlar"
 
@@ -452,7 +452,7 @@ msgstr "Nashrdan olish"
 msgid "Unpublished: %d"
 msgstr "Nashrdan olindi: %d"
 
-#: apps/catalog/apps.py:8 config/settings/base.py:236
+#: apps/catalog/apps.py:8 config/settings/base.py:237
 msgid "Catalog"
 msgstr "Katalog"
 
@@ -570,7 +570,7 @@ msgstr "Uniseks"
 msgid "Model reference"
 msgstr "Model artikuli"
 
-#: apps/catalog/models.py:143 apps/orders/admin.py:28 apps/orders/models.py:34
+#: apps/catalog/models.py:143 apps/orders/admin.py:45 apps/orders/models.py:34
 #: apps/orders/models.py:196
 msgid "price, USD"
 msgstr "narx, USD"
@@ -737,7 +737,7 @@ msgstr "Ijtimoiy tarmoqlar"
 msgid "Announcement bar"
 msgstr "E’lon satri"
 
-#: apps/content/admin.py:73 config/settings/base.py:239
+#: apps/content/admin.py:73 config/settings/base.py:240
 msgid "Products"
 msgstr "Mahsulotlar"
 
@@ -745,7 +745,7 @@ msgstr "Mahsulotlar"
 msgid "Banner"
 msgstr "Banner"
 
-#: apps/content/apps.py:8 config/settings/base.py:261
+#: apps/content/apps.py:8 config/settings/base.py:262
 msgid "Content"
 msgstr "Kontent"
 
@@ -805,7 +805,7 @@ msgstr "e’lon havolasi"
 msgid "site settings"
 msgstr "sayt sozlamalari"
 
-#: apps/content/models.py:59 config/settings/base.py:279
+#: apps/content/models.py:59 config/settings/base.py:280
 msgid "Site settings"
 msgstr "Sayt sozlamalari"
 
@@ -998,7 +998,7 @@ msgstr "savol"
 msgid "answer"
 msgstr "javob"
 
-#: apps/content/models.py:230 config/settings/base.py:274
+#: apps/content/models.py:230 config/settings/base.py:275
 msgid "FAQ"
 msgstr "Ko‘p beriladigan savollar"
 
@@ -1065,39 +1065,84 @@ msgstr "valyuta kursi"
 msgid "exchange rates"
 msgstr "valyuta kurslari"
 
-#: apps/orders/admin.py:30
+#: apps/orders/admin.py:47
 msgid "by manager"
 msgstr "menejer hisoblaydi"
 
-#: apps/orders/admin.py:139
+#: apps/orders/admin.py:185
 msgid "Customer"
 msgstr "Xaridor"
 
-#: apps/orders/admin.py:150
+#: apps/orders/admin.py:196
 msgid "Delivery"
 msgstr "Yetkazib berish"
 
-#: apps/orders/admin.py:153
+#: apps/orders/admin.py:199
 msgid "Amount"
 msgstr "Summa"
 
-#: apps/orders/admin.py:179
+#: apps/orders/admin.py:210
+msgid "Confirm"
+msgstr "Tasdiqlash"
+
+#: apps/orders/admin.py:212
+msgid "Payment received"
+msgstr "To‘lov qabul qilindi"
+
+#: apps/orders/admin.py:214
+msgid "Ship"
+msgstr "Jo‘natish"
+
+#: apps/orders/admin.py:216
+msgid "Complete"
+msgstr "Yakunlash"
+
+#: apps/orders/admin.py:220
+msgid "Cancel order"
+msgstr "Buyurtmani bekor qilish"
+
+#: apps/orders/admin.py:222 apps/orders/admin.py:284
+msgid "Cancel the order? Items in stock will be returned to the warehouse."
+msgstr "Buyurtma bekor qilinsinmi? Mavjud tovarlar omborga qaytariladi."
+
+#: apps/orders/admin.py:234
+#, python-format
+msgid "Order %(number)s: %(status)s"
+msgstr "Buyurtma %(number)s: %(status)s"
+
+#: apps/orders/admin.py:272 config/settings/base.py:296
+msgid "Order board"
+msgstr "Buyurtmalar doskasi"
+
+#: apps/orders/admin.py:282
+msgid "BTS tracking number (can be left empty):"
+msgstr "BTS trek raqami (bo‘sh qoldirish mumkin):"
+
+#: apps/orders/admin.py:286
+msgid "Could not change the status."
+msgstr "Holatni o‘zgartirib bo‘lmadi."
+
+#: apps/orders/admin.py:297
+msgid "Unknown status."
+msgstr "Noma’lum holat."
+
+#: apps/orders/admin.py:314
 msgid "total"
 msgstr "jami"
 
-#: apps/orders/admin.py:183 apps/orders/models.py:128
+#: apps/orders/admin.py:318 apps/orders/models.py:128
 msgid "display currency"
 msgstr "xaridor valyutasi"
 
-#: apps/orders/admin.py:189
+#: apps/orders/admin.py:324
 msgid "write to customer"
 msgstr "xaridorga yozish"
 
-#: apps/orders/admin.py:196
+#: apps/orders/admin.py:331
 msgid "Call"
 msgstr "Qo‘ng‘iroq qilish"
 
-#: apps/orders/apps.py:8 config/settings/base.py:289
+#: apps/orders/apps.py:8 config/settings/base.py:290
 msgid "Orders"
 msgstr "Buyurtmalar"
 
@@ -1240,71 +1285,112 @@ msgstr "Bu yetkazib berish usuli tanlangan mamlakat uchun mavjud emas."
 msgid "Some items in the cart have changed. Please review the cart."
 msgstr "Savatdagi ba’zi mahsulotlar o‘zgardi. Savatni tekshiring."
 
-#: apps/orders/services.py:217
+#: apps/orders/services.py:219
 #, python-format
 msgid "Cannot change status from “%(from)s” to “%(to)s”."
 msgstr "Holatni «%(from)s» dan «%(to)s» ga o‘zgartirib bo‘lmaydi."
 
-#: config/settings/base.py:120
+#: apps/orders/templates/admin/orders/order/board.html:50
+msgid ""
+"Drag a card to the next column to change the order status. Click the number "
+"to open the order."
+msgstr ""
+"Buyurtma holatini o‘zgartirish uchun kartani keyingi ustunga suring. Raqam —"
+" buyurtmaga havola."
+
+#: apps/orders/templates/admin/orders/order/board.html:52
+#, python-format
+msgid "Completed and cancelled — for the last %(days)s days."
+msgstr "Bajarilgan va bekor qilinganlar — oxirgi %(days)s kun uchun."
+
+#: config/settings/base.py:121
 msgid "English"
 msgstr "Inglizcha"
 
-#: config/settings/base.py:121
+#: config/settings/base.py:122
 msgid "Uzbek"
 msgstr "O‘zbekcha"
 
-#: config/settings/base.py:122
+#: config/settings/base.py:123
 msgid "Russian"
 msgstr "Ruscha"
 
-#: config/settings/base.py:244
+#: config/settings/base.py:245
 msgid "Brands"
 msgstr "Brendlar"
 
-#: config/settings/base.py:249
+#: config/settings/base.py:250
 msgid "Categories"
 msgstr "Kategoriyalar"
 
-#: config/settings/base.py:254
+#: config/settings/base.py:255
 msgid "Specification options"
 msgstr "Xususiyatlar ma’lumotnomasi"
 
-#: config/settings/base.py:264
+#: config/settings/base.py:265
 msgid "Home page"
 msgstr "Bosh sahifa"
 
-#: config/settings/base.py:269
+#: config/settings/base.py:270
 msgid "Pages"
 msgstr "Sahifalar"
 
-#: config/settings/base.py:286
+#: config/settings/base.py:287
 msgid "Sales"
 msgstr "Savdo"
 
-#: config/settings/base.py:300
+#: config/settings/base.py:306
 msgid "Watch requests"
 msgstr "Soat qidiruv so‘rovlari"
 
-#: config/settings/base.py:308
+#: config/settings/base.py:314
 msgid "Settings"
 msgstr "Sozlamalar"
 
-#: config/settings/base.py:311
+#: config/settings/base.py:317
 msgid "Delivery methods"
 msgstr "Yetkazib berish usullari"
 
-#: config/settings/base.py:316
+#: config/settings/base.py:322
 msgid "Exchange rates"
 msgstr "Valyuta kurslari"
 
-#: config/settings/base.py:323
+#: config/settings/base.py:329
 msgid "Users & access"
 msgstr "Foydalanuvchilar va ruxsatlar"
 
-#: config/settings/base.py:326
+#: config/settings/base.py:332
 msgid "Users"
 msgstr "Foydalanuvchilar"
 
-#: config/settings/base.py:331
+#: config/settings/base.py:337
 msgid "Groups"
 msgstr "Guruhlar"
+
+#: config/settings/base.py:350
+msgid "Board"
+msgstr "Doska"
+
+#: config/settings/base.py:352
+msgid "All orders"
+msgstr "Barcha buyurtmalar"
+
+#: config/settings/base.py:364
+msgctxt "orders tab"
+msgid "New"
+msgstr "Yangi"
+
+#: config/settings/base.py:365
+msgctxt "orders tab"
+msgid "Confirmed"
+msgstr "Tasdiqlangan"
+
+#: config/settings/base.py:366
+msgctxt "orders tab"
+msgid "Paid"
+msgstr "To‘langan"
+
+#: config/settings/base.py:367
+msgctxt "orders tab"
+msgid "Shipped"
+msgstr "Jo‘natilgan"

@@ -153,6 +153,7 @@ def test_sms_login(client, settings, monkeypatch):
 
 def test_sms_disabled_and_methods(client, settings):
     settings.ESKIZ_EMAIL = ""
+    settings.TELEGRAM_BOT_TOKEN = ""
 
     response = client.post(
         "/api/v1/auth/sms/start", {"phone": "+998901234567"}, content_type="application/json"

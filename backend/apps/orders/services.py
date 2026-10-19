@@ -211,7 +211,9 @@ def release_stock(order: Order) -> None:
 
 
 @transaction.atomic
-def change_status(order: Order, status: str) -> None:
+def change_status(order: Order, status: str, *, tracking_number: str | None = None) -> None:
+    """Переводит заказ в следующий статус. Трек-номер можно передать вместе с отправкой —
+    тогда он попадёт в уведомление покупателю."""
     if not order.can_change_to(status):
         raise OrderError(
             _("Cannot change status from “%(from)s” to “%(to)s”.")
@@ -220,7 +222,11 @@ def change_status(order: Order, status: str) -> None:
     if status == Order.Status.CANCELLED:
         release_stock(order)
     order.status = status
-    order.save(update_fields=["status", "updated_at"])
+    update_fields = ["status", "updated_at"]
+    if tracking_number is not None:
+        order.tracking_number = tracking_number.strip()
+        update_fields.append("tracking_number")
+    order.save(update_fields=update_fields)
     if order.customer_id:
         from apps.accounts.tasks import notify_order_status
 

@@ -2,6 +2,7 @@
 
 import logging
 from typing import Any
+from urllib.parse import urlsplit
 
 import httpx
 from django.conf import settings
@@ -33,9 +34,16 @@ def call(method: str, payload: dict[str, Any] | None = None, *, timeout: float =
     return data.get("result")
 
 
-def url_buttons(*buttons: tuple[str, str]) -> dict:
+def is_public_url(url: str) -> bool:
+    """Telegram отклоняет кнопки со ссылками на localhost — локально их пропускаем."""
+    host = urlsplit(url).hostname or ""
+    return host not in ("localhost", "127.0.0.1", "0.0.0.0") and not host.endswith(".localhost")
+
+
+def url_buttons(*buttons: tuple[str, str]) -> dict | None:
     """Кнопки-ссылки под сообщением: (текст, url), каждая в своей строке."""
-    return {"inline_keyboard": [[{"text": text, "url": url}] for text, url in buttons]}
+    rows = [[{"text": text, "url": url}] for text, url in buttons if is_public_url(url)]
+    return {"inline_keyboard": rows} if rows else None
 
 
 def send_message(chat_id: int | str, text: str, *, reply_markup: dict | None = None) -> bool:

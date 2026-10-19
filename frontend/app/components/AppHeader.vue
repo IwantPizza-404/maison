@@ -161,7 +161,7 @@ const announcementLink = useSiteLink()
         <LanguageSwitcher />
         <UChip :text="wishlist.count" :show="wishlist.count > 0" size="3xl" color="primary" inset class="hidden sm:inline-flex">
           <UButton
-            :to="localePath('/wishlist')"
+            :to="localePath(auth.isLoggedIn ? '/account/wishlist' : '/wishlist')"
             icon="i-lucide-heart"
             :aria-label="t('wishlist.title')"
             variant="ghost"
@@ -173,7 +173,7 @@ const announcementLink = useSiteLink()
           icon="i-lucide-user"
           :aria-label="auth.isLoggedIn ? t('account.title') : t('login.title')"
           variant="ghost"
-          :class="auth.isLoggedIn ? 'text-gold-500 hover:bg-white/10' : 'text-white hover:bg-white/10'"
+          class="text-white hover:bg-white/10"
         />
         <UChip :text="cart.count" :show="cart.count > 0" size="3xl" color="primary" inset>
           <UButton

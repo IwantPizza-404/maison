@@ -76,6 +76,17 @@ def test_status_transitions_are_enforced(watch):
         change_status(created, Order.Status.CANCELLED)
 
 
+def test_tracking_number_saved_with_shipping(watch):
+    created = order({"watch": 1})
+    change_status(created, Order.Status.CONFIRMED)
+    change_status(created, Order.Status.PAID)
+
+    change_status(created, Order.Status.SHIPPED, tracking_number=" BTS42 ")
+
+    created.refresh_from_db()
+    assert created.tracking_number == "BTS42"
+
+
 def test_international_delivery_only_outside_uzbekistan(watch):
     with pytest.raises(OrderError):
         order({"watch": 1}, delivery="bts-international")

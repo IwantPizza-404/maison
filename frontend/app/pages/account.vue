@@ -11,7 +11,7 @@ const auth = useAuthStore()
 const items = computed<NavigationMenuItem[]>(() => [
   { label: t('account.nav.overview'), icon: 'i-lucide-layout-grid', to: localePath('/account'), exact: true },
   { label: t('account.nav.orders'), icon: 'i-lucide-package', to: localePath('/account/orders') },
-  { label: t('account.nav.wishlist'), icon: 'i-lucide-heart', to: localePath('/wishlist') },
+  { label: t('account.nav.wishlist'), icon: 'i-lucide-heart', to: localePath('/account/wishlist') },
   { label: t('account.nav.collection'), icon: 'i-lucide-watch', to: localePath('/account/collection') },
   { label: t('account.nav.alerts'), icon: 'i-lucide-bell', to: localePath('/account/alerts') },
   { label: t('account.nav.requests'), icon: 'i-lucide-search', to: localePath('/account/requests') },

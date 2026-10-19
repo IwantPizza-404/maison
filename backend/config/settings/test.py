@@ -11,3 +11,5 @@ STORAGES = {
 EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
 CELERY_TASK_ALWAYS_EAGER = True
 MEILISEARCH_URL = ""  # в тестах поиск идёт по базе; Meilisearch проверяется моком
+# Telegram не принимает кнопки со ссылкой на localhost — в тестах нужен публичный адрес
+SITE_URL = "https://maison.test"

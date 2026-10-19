@@ -3,12 +3,11 @@ import { useAuthStore } from '~/stores/auth'
 import { CURRENCIES, type Currency, useCurrencyStore } from '~/stores/currency'
 import type { Address, AddressPayload, AuthCustomer, CheckoutOptions } from '~/types/catalog'
 
-const { t, locale, locales } = useI18n()
+const { t, locale, locales, setLocale } = useI18n()
 const api = useApi()
 const toast = useToast()
 const auth = useAuthStore()
 const currency = useCurrencyStore()
-const switchLocalePath = useSwitchLocalePath()
 
 type Language = 'en' | 'ru' | 'uz'
 const profile = reactive({
@@ -30,8 +29,8 @@ async function saveProfile() {
     auth.set(updated)
     currency.set(updated.currency as Currency)
     toast.add({ title: t('account.profile.saved'), icon: 'i-lucide-check' })
-    // Язык профиля — и язык сайта
-    if (updated.language !== locale.value) await navigateTo(switchLocalePath(updated.language as Language))
+    // Язык профиля — и язык сайта; setLocale запоминает выбор в cookie, иначе на английский не переключить
+    if (updated.language !== locale.value) await setLocale(updated.language as Language)
   } catch {
     toast.add({ title: t('login.error'), color: 'error' })
   } finally {

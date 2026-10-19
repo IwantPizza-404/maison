@@ -5,12 +5,14 @@ const switchLocalePath = useSwitchLocalePath()
 
 <template>
   <nav :aria-label="t('language')" class="flex gap-1">
-    <!-- Ссылка сама cookie не меняет: без этого переход на английский (корень без префикса)
-         возвращал на язык из cookie через detectBrowserLanguage -->
+    <!-- :locale="false" — путь уже локализован: иначе Nuxt UI добавляет к пути английского
+         (без префикса) текущий язык и ссылка ведёт на ту же страницу.
+         Cookie — чтобы переход на корень не возвращал на прежний язык через detectBrowserLanguage. -->
     <UButton
       v-for="item in locales"
       :key="item.code"
       :to="switchLocalePath(item.code)"
+      :locale="false"
       :label="item.code"
       variant="link"
       size="sm"

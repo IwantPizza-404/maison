@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-16 23:04+0500\n"
+"POT-Creation-Date: 2026-10-22 01:16+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,11 +39,11 @@ msgid "Reply"
 msgstr "Ответ"
 
 #: apps/accounts/admin.py:139 apps/accounts/models.py:293
-#: apps/orders/admin.py:310 apps/orders/models.py:93
+#: apps/orders/admin.py:328 apps/orders/models.py:93
 msgid "status"
 msgstr "статус"
 
-#: apps/accounts/apps.py:8 config/settings/base.py:301
+#: apps/accounts/apps.py:8 config/settings/base.py:306
 msgid "Customers"
 msgstr "Покупатели"
 
@@ -380,74 +380,116 @@ msgstr "Код устарел. Начните вход заново."
 msgid "Wrong code."
 msgstr "Неверный код."
 
-#: apps/catalog/admin.py:27 apps/catalog/models.py:189
+#: apps/catalog/admin.py:52 apps/catalog/models.py:189
 #: apps/content/models.py:102
 msgid "products"
 msgstr "товары"
 
-#: apps/catalog/admin.py:59
+#: apps/catalog/admin.py:84
 msgid "Movement"
 msgstr "Механизм"
 
-#: apps/catalog/admin.py:61
+#: apps/catalog/admin.py:86
 msgid "Case"
 msgstr "Корпус"
 
-#: apps/catalog/admin.py:69
+#: apps/catalog/admin.py:94
 msgid "Dial & strap"
 msgstr "Циферблат и ремешок"
 
-#: apps/catalog/admin.py:71
+#: apps/catalog/admin.py:96
 msgid "Set & provenance"
 msgstr "Комплект и происхождение"
 
-#: apps/catalog/admin.py:85
+#: apps/catalog/admin.py:110
 msgid "preview"
 msgstr "превью"
 
-#: apps/catalog/admin.py:125
+#: apps/catalog/admin.py:152
 msgid "Price"
 msgstr "Цена"
 
-#: apps/catalog/admin.py:127
+#: apps/catalog/admin.py:154
 msgid "Availability"
 msgstr "Наличие"
 
-#: apps/catalog/admin.py:130
+#: apps/catalog/admin.py:157
 msgid "Attributes"
 msgstr "Характеристики"
 
-#: apps/catalog/admin.py:131 apps/content/admin.py:102
+#: apps/catalog/admin.py:158 apps/content/admin.py:102
 msgid "Publishing"
 msgstr "Публикация"
 
-#: apps/catalog/admin.py:133
+#: apps/catalog/admin.py:160
 msgid "SEO"
 msgstr "SEO"
 
-#: apps/catalog/admin.py:152 apps/catalog/models.py:165
+#: apps/catalog/admin.py:173
+msgid "Leave empty — it is built from the brand and the English name."
+msgstr "Оставьте пустым — соберётся из бренда и английского названия."
+
+#: apps/catalog/admin.py:196 apps/catalog/models.py:165
 msgid "availability"
 msgstr "наличие"
 
-#: apps/catalog/admin.py:162
+#: apps/catalog/admin.py:206
 msgid "Publish selected"
 msgstr "Опубликовать выбранные"
 
-#: apps/catalog/admin.py:170
+#: apps/catalog/admin.py:214
 #, python-format
 msgid "Published: %d"
 msgstr "Опубликовано: %d"
 
-#: apps/catalog/admin.py:172
+#: apps/catalog/admin.py:216
 msgid "Unpublish selected"
 msgstr "Снять с публикации"
 
-#: apps/catalog/admin.py:175
+#: apps/catalog/admin.py:219
 #, python-format
 msgid "Unpublished: %d"
 msgstr "Снято с публикации: %d"
 
-#: apps/catalog/apps.py:8 config/settings/base.py:237
+#: apps/catalog/admin.py:226
+msgid "Export selected to Excel"
+msgstr "Экспорт выбранных в Excel"
+
+#: apps/catalog/admin.py:230
+msgid "Export"
+msgstr "Экспорт"
+
+#: apps/catalog/admin.py:234
+msgid "Import template"
+msgstr "Шаблон импорта"
+
+#: apps/catalog/admin.py:238
+#: apps/catalog/templates/admin/catalog/product/import.html:110
+msgid "Import"
+msgstr "Импорт"
+
+#: apps/catalog/admin.py:244
+msgid "Import products"
+msgstr "Импорт товаров"
+
+#: apps/catalog/admin.py:252
+msgid "The check has expired, upload the file again."
+msgstr "Проверка устарела, загрузите файл ещё раз."
+
+#: apps/catalog/admin.py:260
+#, python-format
+msgid "Import finished: %(created)d created, %(updated)d updated."
+msgstr "Импорт завершён: создано %(created)d, обновлено %(updated)d."
+
+#: apps/catalog/admin.py:269
+msgid "Choose a file."
+msgstr "Выберите файл."
+
+#: apps/catalog/admin.py:271
+msgid "The file is too large (max 5 MB)."
+msgstr "Файл слишком большой (максимум 5 МБ)."
+
+#: apps/catalog/apps.py:8 config/settings/base.py:240
 msgid "Catalog"
 msgstr "Каталог"
 
@@ -565,7 +607,7 @@ msgstr "Унисекс"
 msgid "Model reference"
 msgstr "Артикул модели"
 
-#: apps/catalog/models.py:143 apps/orders/admin.py:45 apps/orders/models.py:34
+#: apps/catalog/models.py:143 apps/orders/admin.py:58 apps/orders/models.py:34
 #: apps/orders/models.py:196
 msgid "price, USD"
 msgstr "цена, USD"
@@ -716,6 +758,336 @@ msgstr "альтернативный текст"
 msgid "images"
 msgstr "изображения"
 
+#: apps/catalog/photos.py:66
+msgid "invalid link"
+msgstr "неверная ссылка"
+
+#: apps/catalog/photos.py:70
+#, python-format
+msgid "site %(host)s not found"
+msgstr "сайт %(host)s не найден"
+
+#: apps/catalog/photos.py:74
+msgid "links to internal addresses are not allowed"
+msgstr "ссылки на внутренние адреса запрещены"
+
+#: apps/catalog/photos.py:80 apps/catalog/photos.py:116
+#, python-format
+msgid "file is larger than %(mb)s MB"
+msgstr "файл больше %(mb)s МБ"
+
+#: apps/catalog/photos.py:86
+msgid "the link does not lead to an image"
+msgstr "по ссылке не изображение"
+
+#: apps/catalog/photos.py:89
+#, python-format
+msgid "format %(format)s is not supported"
+msgstr "формат %(format)s не поддерживается"
+
+#: apps/catalog/photos.py:99
+msgid "the link must start with http:// or https://"
+msgstr "ссылка должна начинаться с http:// или https://"
+
+#: apps/catalog/photos.py:110
+#, python-format
+msgid "the site responded with error %(code)s"
+msgstr "сайт ответил ошибкой %(code)s"
+
+#: apps/catalog/photos.py:118
+msgid "too many redirects"
+msgstr "слишком много перенаправлений"
+
+#: apps/catalog/photos.py:120
+msgid "could not download the file"
+msgstr "не удалось скачать файл"
+
+#: apps/catalog/services.py:84
+msgid "Empty — a new product is created."
+msgstr "Пусто — будет создан новый товар."
+
+#: apps/catalog/services.py:91
+msgid "USD, number without currency."
+msgstr "В USD, число без знака валюты."
+
+#: apps/catalog/services.py:98
+msgid "New products are drafts unless “yes”."
+msgstr "Новые товары — черновики, если не указано «yes»."
+
+#: apps/catalog/services.py:109
+msgid ""
+"Photo links, one per line; the first is the main photo. Empty — photos stay "
+"as they are."
+msgstr ""
+"Ссылки на фото, по одной в строке; первая — главное фото. Пусто — фото не "
+"меняются."
+
+#: apps/catalog/services.py:129
+msgid "Several values separated by commas."
+msgstr "Несколько значений через запятую."
+
+#: apps/catalog/services.py:170
+#, python-format
+msgid "“%(value)s” matches several %(what)s."
+msgstr "«%(value)s» подходит под несколько значений (%(what)s)."
+
+#: apps/catalog/services.py:173
+#, python-format
+msgid "%(what)s “%(value)s” not found."
+msgstr "Не найдено: %(what)s «%(value)s»."
+
+#: apps/catalog/services.py:271
+msgid "Choose a value from the list."
+msgstr "Выберите значение из списка."
+
+#: apps/catalog/services.py:279
+msgid "Instructions"
+msgstr "Инструкция"
+
+#: apps/catalog/services.py:281
+msgid "How to fill in"
+msgstr "Как заполнять"
+
+#: apps/catalog/services.py:282
+msgid ""
+"One row — one product. Do not rename the columns of the “Products” sheet."
+msgstr ""
+"Одна строка — один товар. Не переименовывайте колонки листа «Products»."
+
+#: apps/catalog/services.py:283
+msgid ""
+"Existing slug — the product is updated; empty slug — a new product is "
+"created."
+msgstr ""
+"Slug из каталога — товар обновится; пустой slug — будет создан новый товар."
+
+#: apps/catalog/services.py:284
+msgid "Columns removed from the file are left unchanged in the catalog."
+msgstr "Колонки, удалённые из файла, в каталоге не меняются."
+
+#: apps/catalog/services.py:285
+msgid ""
+"If any row has an error, nothing is imported — fix the file and upload it "
+"again."
+msgstr ""
+"Если хоть в одной строке ошибка, ничего не импортируется — исправьте файл и "
+"загрузите снова."
+
+#: apps/catalog/services.py:286
+msgid ""
+"Photos: links in the “images” column — Google Drive, Dropbox or any direct "
+"link."
+msgstr ""
+"Фото — ссылки в колонке «images»: Google Drive, Dropbox или любая прямая "
+"ссылка."
+
+#: apps/catalog/services.py:288
+#: apps/catalog/templates/admin/catalog/product/import.html:79
+msgid "Column"
+msgstr "Колонка"
+
+#: apps/catalog/services.py:288
+msgid "Field"
+msgstr "Поле"
+
+#: apps/catalog/services.py:288
+msgid "Required"
+msgstr "Обязательно"
+
+#: apps/catalog/services.py:288
+msgid "Values"
+msgstr "Значения"
+
+#: apps/catalog/services.py:296
+msgid "from the list, slug or name"
+msgstr "из списка, slug или название"
+
+#: apps/catalog/services.py:299
+msgid "yes"
+msgstr "да"
+
+#: apps/catalog/services.py:379
+msgid "Could not read the file. Upload an .xlsx file."
+msgstr "Не удалось прочитать файл. Загрузите файл .xlsx."
+
+#: apps/catalog/services.py:384
+msgid "The first row must contain column names, as in the template."
+msgstr "В первой строке должны быть названия колонок, как в шаблоне."
+
+#: apps/catalog/services.py:387
+#, python-format
+msgid "Unknown columns: %s"
+msgstr "Неизвестные колонки: %s"
+
+#: apps/catalog/services.py:390
+#, python-format
+msgid "Duplicate columns: %s"
+msgstr "Повторяющиеся колонки: %s"
+
+#: apps/catalog/services.py:400
+#, python-format
+msgid "Too many rows: at most %d per file."
+msgstr "Слишком много строк: не больше %d в одном файле."
+
+#: apps/catalog/services.py:424
+#, python-format
+msgid "Unknown value “%(value)s”. Allowed: %(allowed)s."
+msgstr "Неизвестное значение «%(value)s». Допустимо: %(allowed)s."
+
+#: apps/catalog/services.py:436
+msgid "Enter yes or no."
+msgstr "Укажите yes или no."
+
+#: apps/catalog/services.py:448
+msgid "Enter a number."
+msgstr "Введите число."
+
+#: apps/catalog/services.py:452
+msgid "Enter a whole number."
+msgstr "Введите целое неотрицательное число."
+
+#: apps/catalog/services.py:519
+msgid "This slug is already used in another row of the file."
+msgstr "Этот slug уже есть в другой строке файла."
+
+#: apps/catalog/services.py:535
+msgid "Required column."
+msgstr "Обязательная колонка."
+
+#: apps/catalog/services.py:570
+msgid "Required column is missing in the file."
+msgstr "В файле нет обязательной колонки."
+
+#: apps/catalog/services.py:609
+#, python-format
+msgid "At most %d photos per product."
+msgstr "Не больше %d фото у одного товара."
+
+#: apps/catalog/services.py:629
+#, python-format
+msgid "Photo %(n)d: %(error)s."
+msgstr "Фото %(n)d: %(error)s."
+
+#: apps/catalog/services.py:674
+msgid "The file has no products."
+msgstr "В файле нет товаров."
+
+#: apps/catalog/services.py:706
+#, python-format
+msgid "Too many new photos: at most %d per file. Split the file into parts."
+msgstr ""
+"Слишком много новых фото: не больше %d в одном файле. Разделите файл на "
+"части."
+
+#: apps/catalog/templates/admin/catalog/product/import.html:38
+msgid "Import products from Excel"
+msgstr "Импорт товаров из Excel"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:41
+msgid "Download"
+msgstr "Скачайте"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:42
+msgid "the template"
+msgstr "шаблон"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:43
+msgid "or"
+msgstr "или"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:44
+msgid "the current catalog"
+msgstr "текущий каталог"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:45
+msgid "— edit it and save as .xlsx."
+msgstr "— заполните и сохраните в формате .xlsx."
+
+#: apps/catalog/templates/admin/catalog/product/import.html:47
+msgid ""
+"Upload the file: we check every row and show what will change. Nothing is "
+"saved yet."
+msgstr ""
+"Загрузите файл: проверим каждую строку и покажем, что изменится. Пока ничего"
+" не сохраняется."
+
+#: apps/catalog/templates/admin/catalog/product/import.html:48
+msgid "If there are no errors, confirm the import."
+msgstr "Если ошибок нет — подтвердите импорт."
+
+#: apps/catalog/templates/admin/catalog/product/import.html:51
+msgid ""
+"Existing slug — the product is updated; empty slug — a new product is "
+"created. Columns removed from the file stay unchanged. Photos — links in the"
+" images column, one per line."
+msgstr ""
+"Slug из каталога — товар обновится, пустой slug — будет создан новый. "
+"Колонки, удалённые из файла, не меняются. Фото — ссылки в колонке images, по"
+" одной в строке."
+
+#: apps/catalog/templates/admin/catalog/product/import.html:58
+msgid "Check file"
+msgstr "Проверить файл"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:65
+msgid "Check result"
+msgstr "Результат проверки"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:67
+msgctxt "import"
+msgid "New"
+msgstr "Новые"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:68
+msgctxt "import"
+msgid "Updated"
+msgstr "Обновлённые"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:69
+#: apps/catalog/templates/admin/catalog/product/import.html:96
+msgid "No changes"
+msgstr "Без изменений"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:71
+msgid "Errors"
+msgstr "Ошибки"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:76
+msgid "Nothing was imported. Fix the rows below and upload the file again."
+msgstr ""
+"Ничего не импортировано. Исправьте строки ниже и загрузите файл снова."
+
+#: apps/catalog/templates/admin/catalog/product/import.html:79
+#: apps/catalog/templates/admin/catalog/product/import.html:90
+msgid "Row"
+msgstr "Строка"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:79
+msgid "Error"
+msgstr "Ошибка"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:90
+msgid "Action"
+msgstr "Действие"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:90
+msgid "Product"
+msgstr "Товар"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:90
+msgid "Changed columns"
+msgstr "Изменённые колонки"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:96
+msgctxt "import row"
+msgid "Create"
+msgstr "Создать"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:96
+msgctxt "import row"
+msgid "Update"
+msgstr "Обновить"
+
 #: apps/content/admin.py:16
 msgid "Contacts"
 msgstr "Контакты"
@@ -732,7 +1104,7 @@ msgstr "Соцсети"
 msgid "Announcement bar"
 msgstr "Строка объявления"
 
-#: apps/content/admin.py:73 config/settings/base.py:240
+#: apps/content/admin.py:73 config/settings/base.py:243
 msgid "Products"
 msgstr "Товары"
 
@@ -740,7 +1112,7 @@ msgstr "Товары"
 msgid "Banner"
 msgstr "Баннер"
 
-#: apps/content/apps.py:8 config/settings/base.py:262
+#: apps/content/apps.py:8 config/settings/base.py:265
 msgid "Content"
 msgstr "Контент"
 
@@ -796,7 +1168,7 @@ msgstr "ссылка объявления"
 msgid "site settings"
 msgstr "настройки сайта"
 
-#: apps/content/models.py:59 config/settings/base.py:280
+#: apps/content/models.py:59 config/settings/base.py:283
 msgid "Site settings"
 msgstr "Настройки сайта"
 
@@ -989,7 +1361,7 @@ msgstr "вопрос"
 msgid "answer"
 msgstr "ответ"
 
-#: apps/content/models.py:230 config/settings/base.py:275
+#: apps/content/models.py:230 config/settings/base.py:278
 msgid "FAQ"
 msgstr "Частые вопросы"
 
@@ -1056,84 +1428,84 @@ msgstr "курс валюты"
 msgid "exchange rates"
 msgstr "курсы валют"
 
-#: apps/orders/admin.py:47
+#: apps/orders/admin.py:60
 msgid "by manager"
 msgstr "рассчитывает менеджер"
 
-#: apps/orders/admin.py:185
+#: apps/orders/admin.py:198
 msgid "Customer"
 msgstr "Покупатель"
 
-#: apps/orders/admin.py:196
+#: apps/orders/admin.py:209
 msgid "Delivery"
 msgstr "Доставка"
 
-#: apps/orders/admin.py:199
+#: apps/orders/admin.py:212
 msgid "Amount"
 msgstr "Сумма"
 
-#: apps/orders/admin.py:210
+#: apps/orders/admin.py:223
 msgid "Confirm"
 msgstr "Подтвердить"
 
-#: apps/orders/admin.py:212
+#: apps/orders/admin.py:225
 msgid "Payment received"
 msgstr "Оплата получена"
 
-#: apps/orders/admin.py:214
+#: apps/orders/admin.py:227
 msgid "Ship"
 msgstr "Отправить"
 
-#: apps/orders/admin.py:216
+#: apps/orders/admin.py:229
 msgid "Complete"
 msgstr "Завершить"
 
-#: apps/orders/admin.py:220
+#: apps/orders/admin.py:233
 msgid "Cancel order"
 msgstr "Отменить заказ"
 
-#: apps/orders/admin.py:222 apps/orders/admin.py:284
+#: apps/orders/admin.py:235 apps/orders/admin.py:302
 msgid "Cancel the order? Items in stock will be returned to the warehouse."
 msgstr "Отменить заказ? Товары из наличия вернутся на склад."
 
-#: apps/orders/admin.py:234
+#: apps/orders/admin.py:247
 #, python-format
 msgid "Order %(number)s: %(status)s"
 msgstr "Заказ %(number)s: %(status)s"
 
-#: apps/orders/admin.py:272 config/settings/base.py:296
+#: apps/orders/admin.py:284 config/settings/base.py:300
 msgid "Order board"
 msgstr "Доска заказов"
 
-#: apps/orders/admin.py:282
+#: apps/orders/admin.py:300
 msgid "BTS tracking number (can be left empty):"
 msgstr "Трек-номер BTS (можно оставить пустым):"
 
-#: apps/orders/admin.py:286
+#: apps/orders/admin.py:304
 msgid "Could not change the status."
 msgstr "Не удалось изменить статус."
 
-#: apps/orders/admin.py:297
+#: apps/orders/admin.py:315
 msgid "Unknown status."
 msgstr "Неизвестный статус."
 
-#: apps/orders/admin.py:314
+#: apps/orders/admin.py:332
 msgid "total"
 msgstr "итого"
 
-#: apps/orders/admin.py:318 apps/orders/models.py:128
+#: apps/orders/admin.py:336 apps/orders/models.py:128
 msgid "display currency"
 msgstr "валюта покупателя"
 
-#: apps/orders/admin.py:324
+#: apps/orders/admin.py:342
 msgid "write to customer"
 msgstr "написать покупателю"
 
-#: apps/orders/admin.py:331
+#: apps/orders/admin.py:349
 msgid "Call"
 msgstr "Позвонить"
 
-#: apps/orders/apps.py:8 config/settings/base.py:290
+#: apps/orders/apps.py:8 config/settings/base.py:293
 msgid "Orders"
 msgstr "Заказы"
 
@@ -1281,7 +1653,7 @@ msgstr "Некоторые товары в корзине изменились. 
 msgid "Cannot change status from “%(from)s” to “%(to)s”."
 msgstr "Нельзя изменить статус с «%(from)s» на «%(to)s»."
 
-#: apps/orders/templates/admin/orders/order/board.html:50
+#: apps/orders/templates/admin/orders/order/board.html:51
 msgid ""
 "Drag a card to the next column to change the order status. Click the number "
 "to open the order."
@@ -1289,99 +1661,99 @@ msgstr ""
 "Перетащите карточку в следующую колонку, чтобы сменить статус заказа. Номер "
 "— ссылка на заказ."
 
-#: apps/orders/templates/admin/orders/order/board.html:52
+#: apps/orders/templates/admin/orders/order/board.html:53
 #, python-format
 msgid "Completed and cancelled — for the last %(days)s days."
 msgstr "Завершённые и отменённые — за последние %(days)s дн."
 
-#: config/settings/base.py:121
+#: config/settings/base.py:122
 msgid "English"
 msgstr "Английский"
 
-#: config/settings/base.py:122
+#: config/settings/base.py:123
 msgid "Uzbek"
 msgstr "Узбекский"
 
-#: config/settings/base.py:123
+#: config/settings/base.py:124
 msgid "Russian"
 msgstr "Русский"
 
-#: config/settings/base.py:245
+#: config/settings/base.py:248
 msgid "Brands"
 msgstr "Бренды"
 
-#: config/settings/base.py:250
+#: config/settings/base.py:253
 msgid "Categories"
 msgstr "Категории"
 
-#: config/settings/base.py:255
+#: config/settings/base.py:258
 msgid "Specification options"
 msgstr "Справочник характеристик"
 
-#: config/settings/base.py:265
+#: config/settings/base.py:268
 msgid "Home page"
 msgstr "Главная страница"
 
-#: config/settings/base.py:270
+#: config/settings/base.py:273
 msgid "Pages"
 msgstr "Страницы"
 
-#: config/settings/base.py:287
+#: config/settings/base.py:290
 msgid "Sales"
 msgstr "Продажи"
 
-#: config/settings/base.py:306
+#: config/settings/base.py:311
 msgid "Watch requests"
 msgstr "Заявки на поиск часов"
 
-#: config/settings/base.py:314
+#: config/settings/base.py:319
 msgid "Settings"
 msgstr "Настройки"
 
-#: config/settings/base.py:317
+#: config/settings/base.py:322
 msgid "Delivery methods"
 msgstr "Способы доставки"
 
-#: config/settings/base.py:322
+#: config/settings/base.py:327
 msgid "Exchange rates"
 msgstr "Курсы валют"
 
-#: config/settings/base.py:329
+#: config/settings/base.py:334
 msgid "Users & access"
 msgstr "Пользователи и доступ"
 
-#: config/settings/base.py:332
+#: config/settings/base.py:337
 msgid "Users"
 msgstr "Пользователи"
 
-#: config/settings/base.py:337
+#: config/settings/base.py:342
 msgid "Groups"
 msgstr "Группы"
 
-#: config/settings/base.py:350
+#: config/settings/base.py:355
 msgid "Board"
 msgstr "Доска"
 
-#: config/settings/base.py:352
+#: config/settings/base.py:357
 msgid "All orders"
 msgstr "Все заказы"
 
-#: config/settings/base.py:364
+#: config/settings/base.py:369
 msgctxt "orders tab"
 msgid "New"
 msgstr "Новые"
 
-#: config/settings/base.py:365
+#: config/settings/base.py:370
 msgctxt "orders tab"
 msgid "Confirmed"
 msgstr "Подтверждённые"
 
-#: config/settings/base.py:366
+#: config/settings/base.py:371
 msgctxt "orders tab"
 msgid "Paid"
 msgstr "Оплаченные"
 
-#: config/settings/base.py:367
+#: config/settings/base.py:372
 msgctxt "orders tab"
 msgid "Shipped"
 msgstr "Отправленные"

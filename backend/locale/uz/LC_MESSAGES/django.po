@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-16 23:04+0500\n"
+"POT-Creation-Date: 2026-10-22 01:16+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,11 +39,11 @@ msgid "Reply"
 msgstr "Javob"
 
 #: apps/accounts/admin.py:139 apps/accounts/models.py:293
-#: apps/orders/admin.py:310 apps/orders/models.py:93
+#: apps/orders/admin.py:328 apps/orders/models.py:93
 msgid "status"
 msgstr "holat"
 
-#: apps/accounts/apps.py:8 config/settings/base.py:301
+#: apps/accounts/apps.py:8 config/settings/base.py:306
 msgid "Customers"
 msgstr "Xaridorlar"
 
@@ -385,74 +385,117 @@ msgstr "Kod eskirgan. Qaytadan kiring."
 msgid "Wrong code."
 msgstr "Kod noto‘g‘ri."
 
-#: apps/catalog/admin.py:27 apps/catalog/models.py:189
+#: apps/catalog/admin.py:52 apps/catalog/models.py:189
 #: apps/content/models.py:102
 msgid "products"
 msgstr "mahsulotlar"
 
-#: apps/catalog/admin.py:59
+#: apps/catalog/admin.py:84
 msgid "Movement"
 msgstr "Mexanizm"
 
-#: apps/catalog/admin.py:61
+#: apps/catalog/admin.py:86
 msgid "Case"
 msgstr "Korpus"
 
-#: apps/catalog/admin.py:69
+#: apps/catalog/admin.py:94
 msgid "Dial & strap"
 msgstr "Siferblat va tasma"
 
-#: apps/catalog/admin.py:71
+#: apps/catalog/admin.py:96
 msgid "Set & provenance"
 msgstr "To‘plam va kelib chiqishi"
 
-#: apps/catalog/admin.py:85
+#: apps/catalog/admin.py:110
 msgid "preview"
 msgstr "ko‘rinish"
 
-#: apps/catalog/admin.py:125
+#: apps/catalog/admin.py:152
 msgid "Price"
 msgstr "Narx"
 
-#: apps/catalog/admin.py:127
+#: apps/catalog/admin.py:154
 msgid "Availability"
 msgstr "Mavjudlik"
 
-#: apps/catalog/admin.py:130
+#: apps/catalog/admin.py:157
 msgid "Attributes"
 msgstr "Xususiyatlar"
 
-#: apps/catalog/admin.py:131 apps/content/admin.py:102
+#: apps/catalog/admin.py:158 apps/content/admin.py:102
 msgid "Publishing"
 msgstr "Nashr"
 
-#: apps/catalog/admin.py:133
+#: apps/catalog/admin.py:160
 msgid "SEO"
 msgstr "SEO"
 
-#: apps/catalog/admin.py:152 apps/catalog/models.py:165
+#: apps/catalog/admin.py:173
+msgid "Leave empty — it is built from the brand and the English name."
+msgstr "Bo‘sh qoldiring — brend va inglizcha nomdan yasaladi."
+
+#: apps/catalog/admin.py:196 apps/catalog/models.py:165
 msgid "availability"
 msgstr "mavjudlik"
 
-#: apps/catalog/admin.py:162
+#: apps/catalog/admin.py:206
 msgid "Publish selected"
 msgstr "Tanlanganlarni nashr qilish"
 
-#: apps/catalog/admin.py:170
+#: apps/catalog/admin.py:214
 #, python-format
 msgid "Published: %d"
 msgstr "Nashr qilindi: %d"
 
-#: apps/catalog/admin.py:172
+#: apps/catalog/admin.py:216
 msgid "Unpublish selected"
 msgstr "Nashrdan olish"
 
-#: apps/catalog/admin.py:175
+#: apps/catalog/admin.py:219
 #, python-format
 msgid "Unpublished: %d"
 msgstr "Nashrdan olindi: %d"
 
-#: apps/catalog/apps.py:8 config/settings/base.py:237
+#: apps/catalog/admin.py:226
+msgid "Export selected to Excel"
+msgstr "Tanlanganlarni Excelga eksport"
+
+#: apps/catalog/admin.py:230
+msgid "Export"
+msgstr "Eksport"
+
+#: apps/catalog/admin.py:234
+msgid "Import template"
+msgstr "Import shabloni"
+
+#: apps/catalog/admin.py:238
+#: apps/catalog/templates/admin/catalog/product/import.html:110
+msgid "Import"
+msgstr "Import"
+
+#: apps/catalog/admin.py:244
+msgid "Import products"
+msgstr "Tovarlarni import qilish"
+
+#: apps/catalog/admin.py:252
+msgid "The check has expired, upload the file again."
+msgstr "Tekshiruv eskirdi, faylni qayta yuklang."
+
+#: apps/catalog/admin.py:260
+#, python-format
+msgid "Import finished: %(created)d created, %(updated)d updated."
+msgstr ""
+"Import yakunlandi: %(created)d ta yaratildi, %(updated)d ta yangilandi."
+
+#: apps/catalog/admin.py:269
+msgid "Choose a file."
+msgstr "Faylni tanlang."
+
+#: apps/catalog/admin.py:271
+msgid "The file is too large (max 5 MB)."
+msgstr "Fayl juda katta (ko‘pi bilan 5 MB)."
+
+#: apps/catalog/apps.py:8 config/settings/base.py:240
 msgid "Catalog"
 msgstr "Katalog"
 
@@ -570,7 +613,7 @@ msgstr "Uniseks"
 msgid "Model reference"
 msgstr "Model artikuli"
 
-#: apps/catalog/models.py:143 apps/orders/admin.py:45 apps/orders/models.py:34
+#: apps/catalog/models.py:143 apps/orders/admin.py:58 apps/orders/models.py:34
 #: apps/orders/models.py:196
 msgid "price, USD"
 msgstr "narx, USD"
@@ -721,6 +764,338 @@ msgstr "muqobil matn"
 msgid "images"
 msgstr "rasmlar"
 
+#: apps/catalog/photos.py:66
+msgid "invalid link"
+msgstr "noto‘g‘ri havola"
+
+#: apps/catalog/photos.py:70
+#, python-format
+msgid "site %(host)s not found"
+msgstr "%(host)s sayti topilmadi"
+
+#: apps/catalog/photos.py:74
+msgid "links to internal addresses are not allowed"
+msgstr "ichki manzillarga havolalar taqiqlangan"
+
+#: apps/catalog/photos.py:80 apps/catalog/photos.py:116
+#, python-format
+msgid "file is larger than %(mb)s MB"
+msgstr "fayl %(mb)s MB dan katta"
+
+#: apps/catalog/photos.py:86
+msgid "the link does not lead to an image"
+msgstr "havola rasmga olib bormaydi"
+
+#: apps/catalog/photos.py:89
+#, python-format
+msgid "format %(format)s is not supported"
+msgstr "%(format)s formati qo‘llab-quvvatlanmaydi"
+
+#: apps/catalog/photos.py:99
+msgid "the link must start with http:// or https://"
+msgstr "havola http:// yoki https:// bilan boshlanishi kerak"
+
+#: apps/catalog/photos.py:110
+#, python-format
+msgid "the site responded with error %(code)s"
+msgstr "sayt %(code)s xatosi bilan javob berdi"
+
+#: apps/catalog/photos.py:118
+msgid "too many redirects"
+msgstr "qayta yo‘naltirishlar juda ko‘p"
+
+#: apps/catalog/photos.py:120
+msgid "could not download the file"
+msgstr "faylni yuklab bo‘lmadi"
+
+#: apps/catalog/services.py:84
+msgid "Empty — a new product is created."
+msgstr "Bo‘sh — yangi tovar yaratiladi."
+
+#: apps/catalog/services.py:91
+msgid "USD, number without currency."
+msgstr "USD da, valyuta belgisisiz son."
+
+#: apps/catalog/services.py:98
+msgid "New products are drafts unless “yes”."
+msgstr "Yangi tovarlar «yes» ko‘rsatilmasa — qoralama."
+
+#: apps/catalog/services.py:109
+msgid ""
+"Photo links, one per line; the first is the main photo. Empty — photos stay "
+"as they are."
+msgstr ""
+"Rasm havolalari, har qatorda bittadan; birinchisi — asosiy rasm. Bo‘sh — "
+"rasmlar o‘zgarmaydi."
+
+#: apps/catalog/services.py:129
+msgid "Several values separated by commas."
+msgstr "Bir nechta qiymat vergul bilan."
+
+#: apps/catalog/services.py:170
+#, python-format
+msgid "“%(value)s” matches several %(what)s."
+msgstr "«%(value)s» bir nechta qiymatga mos keladi (%(what)s)."
+
+#: apps/catalog/services.py:173
+#, python-format
+msgid "%(what)s “%(value)s” not found."
+msgstr "Topilmadi: %(what)s «%(value)s»."
+
+#: apps/catalog/services.py:271
+msgid "Choose a value from the list."
+msgstr "Ro‘yxatdan qiymat tanlang."
+
+#: apps/catalog/services.py:279
+msgid "Instructions"
+msgstr "Yo‘riqnoma"
+
+#: apps/catalog/services.py:281
+msgid "How to fill in"
+msgstr "Qanday to‘ldirish kerak"
+
+#: apps/catalog/services.py:282
+msgid ""
+"One row — one product. Do not rename the columns of the “Products” sheet."
+msgstr ""
+"Bir qator — bitta tovar. «Products» varag‘idagi ustunlar nomini "
+"o‘zgartirmang."
+
+#: apps/catalog/services.py:283
+msgid ""
+"Existing slug — the product is updated; empty slug — a new product is "
+"created."
+msgstr ""
+"Katalogdagi slug — tovar yangilanadi; bo‘sh slug — yangi tovar yaratiladi."
+
+#: apps/catalog/services.py:284
+msgid "Columns removed from the file are left unchanged in the catalog."
+msgstr "Fayldan olib tashlangan ustunlar katalogda o‘zgarmaydi."
+
+#: apps/catalog/services.py:285
+msgid ""
+"If any row has an error, nothing is imported — fix the file and upload it "
+"again."
+msgstr ""
+"Biror qatorda xato bo‘lsa, hech narsa import qilinmaydi — faylni tuzating va"
+" qayta yuklang."
+
+#: apps/catalog/services.py:286
+msgid ""
+"Photos: links in the “images” column — Google Drive, Dropbox or any direct "
+"link."
+msgstr ""
+"Rasmlar — «images» ustunidagi havolalar: Google Drive, Dropbox yoki istalgan"
+" to‘g‘ridan-to‘g‘ri havola."
+
+#: apps/catalog/services.py:288
+#: apps/catalog/templates/admin/catalog/product/import.html:79
+msgid "Column"
+msgstr "Ustun"
+
+#: apps/catalog/services.py:288
+msgid "Field"
+msgstr "Maydon"
+
+#: apps/catalog/services.py:288
+msgid "Required"
+msgstr "Majburiy"
+
+#: apps/catalog/services.py:288
+msgid "Values"
+msgstr "Qiymatlar"
+
+#: apps/catalog/services.py:296
+msgid "from the list, slug or name"
+msgstr "ro‘yxatdan, slug yoki nom"
+
+#: apps/catalog/services.py:299
+msgid "yes"
+msgstr "ha"
+
+#: apps/catalog/services.py:379
+msgid "Could not read the file. Upload an .xlsx file."
+msgstr "Faylni o‘qib bo‘lmadi. .xlsx fayl yuklang."
+
+#: apps/catalog/services.py:384
+msgid "The first row must contain column names, as in the template."
+msgstr "Birinchi qatorda shablondagidek ustun nomlari bo‘lishi kerak."
+
+#: apps/catalog/services.py:387
+#, python-format
+msgid "Unknown columns: %s"
+msgstr "Noma’lum ustunlar: %s"
+
+#: apps/catalog/services.py:390
+#, python-format
+msgid "Duplicate columns: %s"
+msgstr "Takrorlangan ustunlar: %s"
+
+#: apps/catalog/services.py:400
+#, python-format
+msgid "Too many rows: at most %d per file."
+msgstr "Qatorlar juda ko‘p: bitta faylda ko‘pi bilan %d ta."
+
+#: apps/catalog/services.py:424
+#, python-format
+msgid "Unknown value “%(value)s”. Allowed: %(allowed)s."
+msgstr "Noma’lum qiymat «%(value)s». Ruxsat etilgan: %(allowed)s."
+
+#: apps/catalog/services.py:436
+msgid "Enter yes or no."
+msgstr "yes yoki no ni kiriting."
+
+#: apps/catalog/services.py:448
+msgid "Enter a number."
+msgstr "Son kiriting."
+
+#: apps/catalog/services.py:452
+msgid "Enter a whole number."
+msgstr "Butun manfiy bo‘lmagan son kiriting."
+
+#: apps/catalog/services.py:519
+msgid "This slug is already used in another row of the file."
+msgstr "Bu slug faylning boshqa qatorida bor."
+
+#: apps/catalog/services.py:535
+msgid "Required column."
+msgstr "Majburiy ustun."
+
+#: apps/catalog/services.py:570
+msgid "Required column is missing in the file."
+msgstr "Faylda majburiy ustun yo‘q."
+
+#: apps/catalog/services.py:609
+#, python-format
+msgid "At most %d photos per product."
+msgstr "Bitta tovarda ko‘pi bilan %d ta rasm."
+
+#: apps/catalog/services.py:629
+#, python-format
+msgid "Photo %(n)d: %(error)s."
+msgstr "%(n)d-rasm: %(error)s."
+
+#: apps/catalog/services.py:674
+msgid "The file has no products."
+msgstr "Faylda tovarlar yo‘q."
+
+#: apps/catalog/services.py:706
+#, python-format
+msgid "Too many new photos: at most %d per file. Split the file into parts."
+msgstr ""
+"Yangi rasmlar juda ko‘p: bitta faylda ko‘pi bilan %d ta. Faylni qismlarga "
+"bo‘ling."
+
+#: apps/catalog/templates/admin/catalog/product/import.html:38
+msgid "Import products from Excel"
+msgstr "Tovarlarni Exceldan import qilish"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:41
+msgid "Download"
+msgstr "Yuklab oling:"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:42
+msgid "the template"
+msgstr "shablon"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:43
+msgid "or"
+msgstr "yoki"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:44
+msgid "the current catalog"
+msgstr "joriy katalog"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:45
+msgid "— edit it and save as .xlsx."
+msgstr "— to‘ldiring va .xlsx formatida saqlang."
+
+#: apps/catalog/templates/admin/catalog/product/import.html:47
+msgid ""
+"Upload the file: we check every row and show what will change. Nothing is "
+"saved yet."
+msgstr ""
+"Faylni yuklang: har bir qatorni tekshirib, nima o‘zgarishini ko‘rsatamiz. "
+"Hozircha hech narsa saqlanmaydi."
+
+#: apps/catalog/templates/admin/catalog/product/import.html:48
+msgid "If there are no errors, confirm the import."
+msgstr "Xatolar bo‘lmasa — importni tasdiqlang."
+
+#: apps/catalog/templates/admin/catalog/product/import.html:51
+msgid ""
+"Existing slug — the product is updated; empty slug — a new product is "
+"created. Columns removed from the file stay unchanged. Photos — links in the"
+" images column, one per line."
+msgstr ""
+"Katalogdagi slug — tovar yangilanadi, bo‘sh slug — yangisi yaratiladi. "
+"Fayldan olib tashlangan ustunlar o‘zgarmaydi. Rasmlar — images ustunidagi "
+"havolalar, har qatorda bittadan."
+
+#: apps/catalog/templates/admin/catalog/product/import.html:58
+msgid "Check file"
+msgstr "Faylni tekshirish"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:65
+msgid "Check result"
+msgstr "Tekshiruv natijasi"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:67
+msgctxt "import"
+msgid "New"
+msgstr "Yangi"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:68
+msgctxt "import"
+msgid "Updated"
+msgstr "Yangilangan"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:69
+#: apps/catalog/templates/admin/catalog/product/import.html:96
+msgid "No changes"
+msgstr "O‘zgarishsiz"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:71
+msgid "Errors"
+msgstr "Xatolar"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:76
+msgid "Nothing was imported. Fix the rows below and upload the file again."
+msgstr ""
+"Hech narsa import qilinmadi. Quyidagi qatorlarni tuzating va faylni qayta "
+"yuklang."
+
+#: apps/catalog/templates/admin/catalog/product/import.html:79
+#: apps/catalog/templates/admin/catalog/product/import.html:90
+msgid "Row"
+msgstr "Qator"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:79
+msgid "Error"
+msgstr "Xato"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:90
+msgid "Action"
+msgstr "Amal"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:90
+msgid "Product"
+msgstr "Tovar"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:90
+msgid "Changed columns"
+msgstr "O‘zgargan ustunlar"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:96
+msgctxt "import row"
+msgid "Create"
+msgstr "Yaratish"
+
+#: apps/catalog/templates/admin/catalog/product/import.html:96
+msgctxt "import row"
+msgid "Update"
+msgstr "Yangilash"
+
 #: apps/content/admin.py:16
 msgid "Contacts"
 msgstr "Kontaktlar"
@@ -737,7 +1112,7 @@ msgstr "Ijtimoiy tarmoqlar"
 msgid "Announcement bar"
 msgstr "E’lon satri"
 
-#: apps/content/admin.py:73 config/settings/base.py:240
+#: apps/content/admin.py:73 config/settings/base.py:243
 msgid "Products"
 msgstr "Mahsulotlar"
 
@@ -745,7 +1120,7 @@ msgstr "Mahsulotlar"
 msgid "Banner"
 msgstr "Banner"
 
-#: apps/content/apps.py:8 config/settings/base.py:262
+#: apps/content/apps.py:8 config/settings/base.py:265
 msgid "Content"
 msgstr "Kontent"
 
@@ -805,7 +1180,7 @@ msgstr "e’lon havolasi"
 msgid "site settings"
 msgstr "sayt sozlamalari"
 
-#: apps/content/models.py:59 config/settings/base.py:280
+#: apps/content/models.py:59 config/settings/base.py:283
 msgid "Site settings"
 msgstr "Sayt sozlamalari"
 
@@ -998,7 +1373,7 @@ msgstr "savol"
 msgid "answer"
 msgstr "javob"
 
-#: apps/content/models.py:230 config/settings/base.py:275
+#: apps/content/models.py:230 config/settings/base.py:278
 msgid "FAQ"
 msgstr "Ko‘p beriladigan savollar"
 
@@ -1065,84 +1440,84 @@ msgstr "valyuta kursi"
 msgid "exchange rates"
 msgstr "valyuta kurslari"
 
-#: apps/orders/admin.py:47
+#: apps/orders/admin.py:60
 msgid "by manager"
 msgstr "menejer hisoblaydi"
 
-#: apps/orders/admin.py:185
+#: apps/orders/admin.py:198
 msgid "Customer"
 msgstr "Xaridor"
 
-#: apps/orders/admin.py:196
+#: apps/orders/admin.py:209
 msgid "Delivery"
 msgstr "Yetkazib berish"
 
-#: apps/orders/admin.py:199
+#: apps/orders/admin.py:212
 msgid "Amount"
 msgstr "Summa"
 
-#: apps/orders/admin.py:210
+#: apps/orders/admin.py:223
 msgid "Confirm"
 msgstr "Tasdiqlash"
 
-#: apps/orders/admin.py:212
+#: apps/orders/admin.py:225
 msgid "Payment received"
 msgstr "To‘lov qabul qilindi"
 
-#: apps/orders/admin.py:214
+#: apps/orders/admin.py:227
 msgid "Ship"
 msgstr "Jo‘natish"
 
-#: apps/orders/admin.py:216
+#: apps/orders/admin.py:229
 msgid "Complete"
 msgstr "Yakunlash"
 
-#: apps/orders/admin.py:220
+#: apps/orders/admin.py:233
 msgid "Cancel order"
 msgstr "Buyurtmani bekor qilish"
 
-#: apps/orders/admin.py:222 apps/orders/admin.py:284
+#: apps/orders/admin.py:235 apps/orders/admin.py:302
 msgid "Cancel the order? Items in stock will be returned to the warehouse."
 msgstr "Buyurtma bekor qilinsinmi? Mavjud tovarlar omborga qaytariladi."
 
-#: apps/orders/admin.py:234
+#: apps/orders/admin.py:247
 #, python-format
 msgid "Order %(number)s: %(status)s"
 msgstr "Buyurtma %(number)s: %(status)s"
 
-#: apps/orders/admin.py:272 config/settings/base.py:296
+#: apps/orders/admin.py:284 config/settings/base.py:300
 msgid "Order board"
 msgstr "Buyurtmalar doskasi"
 
-#: apps/orders/admin.py:282
+#: apps/orders/admin.py:300
 msgid "BTS tracking number (can be left empty):"
 msgstr "BTS trek raqami (bo‘sh qoldirish mumkin):"
 
-#: apps/orders/admin.py:286
+#: apps/orders/admin.py:304
 msgid "Could not change the status."
 msgstr "Holatni o‘zgartirib bo‘lmadi."
 
-#: apps/orders/admin.py:297
+#: apps/orders/admin.py:315
 msgid "Unknown status."
 msgstr "Noma’lum holat."
 
-#: apps/orders/admin.py:314
+#: apps/orders/admin.py:332
 msgid "total"
 msgstr "jami"
 
-#: apps/orders/admin.py:318 apps/orders/models.py:128
+#: apps/orders/admin.py:336 apps/orders/models.py:128
 msgid "display currency"
 msgstr "xaridor valyutasi"
 
-#: apps/orders/admin.py:324
+#: apps/orders/admin.py:342
 msgid "write to customer"
 msgstr "xaridorga yozish"
 
-#: apps/orders/admin.py:331
+#: apps/orders/admin.py:349
 msgid "Call"
 msgstr "Qo‘ng‘iroq qilish"
 
-#: apps/orders/apps.py:8 config/settings/base.py:290
+#: apps/orders/apps.py:8 config/settings/base.py:293
 msgid "Orders"
 msgstr "Buyurtmalar"
 
@@ -1290,7 +1665,7 @@ msgstr "Savatdagi ba’zi mahsulotlar o‘zgardi. Savatni tekshiring."
 msgid "Cannot change status from “%(from)s” to “%(to)s”."
 msgstr "Holatni «%(from)s» dan «%(to)s» ga o‘zgartirib bo‘lmaydi."
 
-#: apps/orders/templates/admin/orders/order/board.html:50
+#: apps/orders/templates/admin/orders/order/board.html:51
 msgid ""
 "Drag a card to the next column to change the order status. Click the number "
 "to open the order."
@@ -1298,99 +1673,99 @@ msgstr ""
 "Buyurtma holatini o‘zgartirish uchun kartani keyingi ustunga suring. Raqam —"
 " buyurtmaga havola."
 
-#: apps/orders/templates/admin/orders/order/board.html:52
+#: apps/orders/templates/admin/orders/order/board.html:53
 #, python-format
 msgid "Completed and cancelled — for the last %(days)s days."
 msgstr "Bajarilgan va bekor qilinganlar — oxirgi %(days)s kun uchun."
 
-#: config/settings/base.py:121
+#: config/settings/base.py:122
 msgid "English"
 msgstr "Inglizcha"
 
-#: config/settings/base.py:122
+#: config/settings/base.py:123
 msgid "Uzbek"
 msgstr "O‘zbekcha"
 
-#: config/settings/base.py:123
+#: config/settings/base.py:124
 msgid "Russian"
 msgstr "Ruscha"
 
-#: config/settings/base.py:245
+#: config/settings/base.py:248
 msgid "Brands"
 msgstr "Brendlar"
 
-#: config/settings/base.py:250
+#: config/settings/base.py:253
 msgid "Categories"
 msgstr "Kategoriyalar"
 
-#: config/settings/base.py:255
+#: config/settings/base.py:258
 msgid "Specification options"
 msgstr "Xususiyatlar ma’lumotnomasi"
 
-#: config/settings/base.py:265
+#: config/settings/base.py:268
 msgid "Home page"
 msgstr "Bosh sahifa"
 
-#: config/settings/base.py:270
+#: config/settings/base.py:273
 msgid "Pages"
 msgstr "Sahifalar"
 
-#: config/settings/base.py:287
+#: config/settings/base.py:290
 msgid "Sales"
 msgstr "Savdo"
 
-#: config/settings/base.py:306
+#: config/settings/base.py:311
 msgid "Watch requests"
 msgstr "Soat qidiruv so‘rovlari"
 
-#: config/settings/base.py:314
+#: config/settings/base.py:319
 msgid "Settings"
 msgstr "Sozlamalar"
 
-#: config/settings/base.py:317
+#: config/settings/base.py:322
 msgid "Delivery methods"
 msgstr "Yetkazib berish usullari"
 
-#: config/settings/base.py:322
+#: config/settings/base.py:327
 msgid "Exchange rates"
 msgstr "Valyuta kurslari"
 
-#: config/settings/base.py:329
+#: config/settings/base.py:334
 msgid "Users & access"
 msgstr "Foydalanuvchilar va ruxsatlar"
 
-#: config/settings/base.py:332
+#: config/settings/base.py:337
 msgid "Users"
 msgstr "Foydalanuvchilar"
 
-#: config/settings/base.py:337
+#: config/settings/base.py:342
 msgid "Groups"
 msgstr "Guruhlar"
 
-#: config/settings/base.py:350
+#: config/settings/base.py:355
 msgid "Board"
 msgstr "Doska"
 
-#: config/settings/base.py:352
+#: config/settings/base.py:357
 msgid "All orders"
 msgstr "Barcha buyurtmalar"
 
-#: config/settings/base.py:364
+#: config/settings/base.py:369
 msgctxt "orders tab"
 msgid "New"
 msgstr "Yangi"
 
-#: config/settings/base.py:365
+#: config/settings/base.py:370
 msgctxt "orders tab"
 msgid "Confirmed"
 msgstr "Tasdiqlangan"
 
-#: config/settings/base.py:366
+#: config/settings/base.py:371
 msgctxt "orders tab"
 msgid "Paid"
 msgstr "To‘langan"
 
-#: config/settings/base.py:367
+#: config/settings/base.py:372
 msgctxt "orders tab"
 msgid "Shipped"
 msgstr "Jo‘natilgan"

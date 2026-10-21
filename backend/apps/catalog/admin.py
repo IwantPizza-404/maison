@@ -1,6 +1,12 @@
+import secrets
+
 from django.contrib import admin, messages
+from django.core.cache import cache
 from django.db.models import QuerySet
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
+from django.template.response import TemplateResponse
+from django.urls import reverse
+from django.utils import timezone
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from modeltranslation.admin import TabbedTranslationAdmin, TranslationTabularInline
@@ -13,6 +19,25 @@ from unfold.contrib.filters.admin import (
 from unfold.decorators import action, display
 
 from .models import Brand, Category, Product, ProductImage, SpecOption, WatchSpecs
+from .services import (
+    ImportFileError,
+    export_products,
+    import_products,
+    products_template,
+    unique_slug,
+)
+
+XLSX = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+IMPORT_MAX_SIZE = 5 * 1024 * 1024
+# Файл между проверкой и подтверждением импорта лежит в кэше
+IMPORT_CACHE_TTL = 30 * 60
+
+
+def xlsx_response(content: bytes, name: str) -> HttpResponse:
+    stamp = timezone.localdate().strftime("%Y-%m-%d")
+    response = HttpResponse(content, content_type=XLSX)
+    response["Content-Disposition"] = f'attachment; filename="{name}-{stamp}.xlsx"'
+    return response
 
 
 @admin.register(Brand)
@@ -116,10 +141,12 @@ class ProductAdmin(ModelAdmin, TabbedTranslationAdmin):
     list_per_page = 50
     search_fields = ("name", "reference", "brand__name", "watch_specs__serial_number")
     autocomplete_fields = ("brand", "category")
-    prepopulated_fields = {"slug": ("name_en",)}
+    # Пустой slug строится при сохранении из бренда и названия — как при импорте (tissot-prx-200);
+    # при вводе название показывается в поле как подсказка (product-slug.js)
     list_select_related = ("brand", "category")
     inlines = (WatchSpecsInline, ProductImageInline)
-    actions = ("publish", "unpublish")
+    actions = ("publish", "unpublish", "export_selected")
+    actions_list = ("export_all", "import_file", "download_template")
     fieldsets = (
         (None, {"fields": (("brand", "category"), "name", "slug", "reference", "description")}),
         (_("Price"), {"fields": (("price", "compare_at_price"),)}),
@@ -134,6 +161,23 @@ class ProductAdmin(ModelAdmin, TabbedTranslationAdmin):
             {"fields": ("seo_title", "seo_description"), "classes": ("collapse",)},
         ),
     )
+
+    class Media:
+        js = ("admin/js/urlify.js", "catalog/js/product-slug.js")
+
+    def get_form(self, request: HttpRequest, obj=None, change=False, **kwargs):
+        form = super().get_form(request, obj, change=change, **kwargs)
+        if "slug" in form.base_fields:
+            form.base_fields["slug"].required = False
+            form.base_fields["slug"].help_text = _(
+                "Leave empty — it is built from the brand and the English name."
+            )
+        return form
+
+    def save_model(self, request: HttpRequest, obj: Product, form, change: bool) -> None:
+        if not obj.slug:
+            obj.slug = unique_slug(obj)
+        super().save_model(request, obj, form, change)
 
     def get_queryset(self, request: HttpRequest) -> QuerySet[Product]:
         return super().get_queryset(request).prefetch_related("images")
@@ -173,3 +217,72 @@ class ProductAdmin(ModelAdmin, TabbedTranslationAdmin):
     def unpublish(self, request: HttpRequest, queryset: QuerySet[Product]) -> None:
         updated = queryset.update(is_published=False)
         self.message_user(request, _("Unpublished: %d") % updated, messages.SUCCESS)
+
+    # --- Excel: экспорт, шаблон, импорт ----------------------------------------------
+
+    def has_import_permission(self, request: HttpRequest) -> bool:
+        return self.has_add_permission(request) and self.has_change_permission(request)
+
+    @action(description=_("Export selected to Excel"))
+    def export_selected(self, request: HttpRequest, queryset: QuerySet[Product]) -> HttpResponse:
+        return xlsx_response(export_products(queryset), "maison-products")
+
+    @action(description=_("Export"), url_path="export", permissions=["view"])
+    def export_all(self, request: HttpRequest) -> HttpResponse:
+        return xlsx_response(export_products(Product.objects.all()), "maison-products")
+
+    @action(description=_("Import template"), url_path="import-template", permissions=["import"])
+    def download_template(self, request: HttpRequest) -> HttpResponse:
+        return xlsx_response(products_template(), "maison-import-template")
+
+    @action(description=_("Import"), url_path="import", permissions=["import"])
+    def import_file(self, request: HttpRequest) -> HttpResponse:
+        """Шаг 1 — загрузка и проверка без сохранения, шаг 2 — подтверждение."""
+        context = {
+            **self.admin_site.each_context(request),
+            "opts": self.model._meta,
+            "title": _("Import products"),
+            "template_url": reverse("admin:catalog_product_download_template"),
+            "export_url": reverse("admin:catalog_product_export_all"),
+        }
+        if request.method == "POST" and request.POST.get("token"):
+            data = cache.get(import_cache_key(request.POST["token"]))
+            if data is None:
+                self.message_user(
+                    request, _("The check has expired, upload the file again."), messages.WARNING
+                )
+            else:
+                report = import_products(data, commit=True)
+                if report.ok:
+                    cache.delete(import_cache_key(request.POST["token"]))
+                    self.message_user(
+                        request,
+                        _("Import finished: %(created)d created, %(updated)d updated.")
+                        % {"created": report.created, "updated": report.updated},
+                        messages.SUCCESS,
+                    )
+                    return HttpResponseRedirect(reverse("admin:catalog_product_changelist"))
+                context["report"] = report  # каталог изменился между проверкой и импортом
+        elif request.method == "POST":
+            upload = request.FILES.get("file")
+            if upload is None:
+                self.message_user(request, _("Choose a file."), messages.ERROR)
+            elif upload.size and upload.size > IMPORT_MAX_SIZE:
+                self.message_user(request, _("The file is too large (max 5 MB)."), messages.ERROR)
+            else:
+                data = upload.read()
+                try:
+                    report = import_products(data, commit=False)
+                except ImportFileError as exc:
+                    self.message_user(request, str(exc), messages.ERROR)
+                else:
+                    context.update(report=report, file_name=upload.name)
+                    if report.ok:
+                        token = secrets.token_urlsafe(16)
+                        cache.set(import_cache_key(token), data, IMPORT_CACHE_TTL)
+                        context["token"] = token
+        return TemplateResponse(request, "admin/catalog/product/import.html", context)
+
+
+def import_cache_key(token: str) -> str:
+    return f"catalog:product-import:{token}"

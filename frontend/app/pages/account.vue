@@ -24,6 +24,15 @@ async function logout() {
 }
 
 useSeoMeta({ robots: 'noindex' })
+
+// На телефоне разделы прокручиваются вбок — показываем активный, а не первые три
+const route = useRoute()
+const mobileNav = useTemplateRef<HTMLElement>('mobileNav')
+function revealActive() {
+  mobileNav.value?.querySelector('[data-active]')?.scrollIntoView({ inline: 'center', block: 'nearest' })
+}
+onMounted(revealActive)
+watch(() => route.path, () => nextTick(revealActive))
 </script>
 
 <template>
@@ -46,7 +55,7 @@ useSeoMeta({ robots: 'noindex' })
         :ui="{ link: 'py-2 data-active:text-gold-700' }"
       />
       <!-- На телефоне — горизонтальная прокрутка разделов -->
-      <div class="-mx-4 overflow-x-auto px-4 lg:hidden">
+      <div ref="mobileNav" class="-mx-4 overflow-x-auto px-4 lg:hidden">
         <UNavigationMenu :items="items" variant="pill" color="neutral" :ui="{ list: 'w-max' }" />
       </div>
 

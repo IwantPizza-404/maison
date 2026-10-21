@@ -82,6 +82,14 @@ const mobileLinks = computed<NavigationMenuItem[]>(() => [
     ],
   },
   { label: t('nav.preowned'), to: watches({ condition: 'pre_owned' }), active: section.value === 'preowned' },
+  // На телефоне сердечка в шапке нет — не помещается
+  {
+    label: t('wishlist.title'),
+    icon: 'i-lucide-heart',
+    to: localePath(auth.isLoggedIn ? '/account/wishlist' : '/wishlist'),
+    badge: wishlist.count || undefined,
+    class: 'sm:hidden',
+  },
 ])
 
 const announcementLink = useSiteLink()
@@ -157,8 +165,11 @@ const announcementLink = useSiteLink()
 
       <template #right>
         <SearchModal />
-        <CurrencySwitcher />
-        <LanguageSwitcher />
+        <!-- На телефоне языки и валюта — внизу мобильного меню: в шапку всё не помещается -->
+        <div class="hidden items-center lg:flex">
+          <CurrencySwitcher />
+          <LanguageSwitcher />
+        </div>
         <UChip :text="wishlist.count" :show="wishlist.count > 0" size="3xl" color="primary" inset class="hidden sm:inline-flex">
           <UButton
             :to="localePath(auth.isLoggedIn ? '/account/wishlist' : '/wishlist')"
@@ -198,8 +209,13 @@ const announcementLink = useSiteLink()
             linkTrailingIcon: 'text-white/50',
             childList: 'border-white/10',
             childLink: 'text-white/70 hover:text-gold-500 data-active:text-gold-500',
+            linkLeadingIcon: 'text-white/50',
           }"
         />
+        <div class="mt-6 flex items-center justify-between border-t border-white/10 pt-6">
+          <LanguageSwitcher />
+          <CurrencySwitcher />
+        </div>
       </template>
     </UHeader>
   </div>

@@ -139,7 +139,7 @@ useSeoMeta({
   <UContainer v-if="product" class="py-10">
     <UBreadcrumb :items="breadcrumbs" class="mb-8" :ui="{ link: 'text-xs uppercase tracking-wider' }" />
 
-    <div class="grid gap-10 lg:grid-cols-2 lg:gap-16">
+    <div class="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
       <!-- Галерея -->
       <div>
         <button

@@ -50,25 +50,26 @@ const page = computed({
         <p class="mt-2 text-sm text-muted">{{ t('catalog.found', { n: products?.count ?? 0 }) }}</p>
       </div>
 
-      <div class="flex items-center gap-3">
+      <!-- На телефоне — во всю ширину: фильтры слева, сортировка занимает остальное -->
+      <div class="flex w-full items-center gap-3 sm:w-auto">
         <USlideover v-if="filters" v-model:open="filtersOpen" side="left" :title="t('filters.title')" class="lg:hidden">
           <UButton
             :label="t('filters.title')"
             icon="i-lucide-sliders-horizontal"
             color="neutral"
             variant="outline"
-            class="lg:hidden"
+            class="shrink-0 lg:hidden"
           >
             <template v-if="catalog.activeCount.value" #trailing>
               <UBadge :label="String(catalog.activeCount.value)" size="sm" />
             </template>
           </UButton>
           <template #body>
-            <CatalogFilters :filters="filters" :hide-brand="!!brand" />
+            <CatalogFilters :filters="filters" :hide-brand="!!brand" hide-title />
           </template>
         </USlideover>
 
-        <USelect v-model="sort" :items="sortItems" :aria-label="t('catalog.sort.label')" class="w-52" />
+        <USelect v-model="sort" :items="sortItems" :aria-label="t('catalog.sort.label')" class="min-w-0 flex-1 sm:w-52 sm:flex-none" />
       </div>
     </header>
 

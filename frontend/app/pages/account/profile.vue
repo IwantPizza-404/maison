@@ -102,7 +102,7 @@ useSeoMeta({ title: () => t('account.nav.profile') })
     </section>
 
     <section>
-      <div class="flex items-end justify-between">
+      <div class="flex flex-wrap items-end justify-between gap-2">
         <h2 class="font-serif text-2xl">{{ t('account.profile.addresses') }}</h2>
         <UButton :label="t('account.profile.addAddress')" icon="i-lucide-plus" variant="link" color="neutral" @click="openEditor()" />
       </div>

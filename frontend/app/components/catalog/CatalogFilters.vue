@@ -3,7 +3,8 @@ import type { AccordionItem } from '@nuxt/ui'
 import type { ListFilterKey } from '~/composables/useCatalogQuery'
 import type { CatalogFilters, SpecOption } from '~/types/catalog'
 
-const props = defineProps<{ filters: CatalogFilters; hideBrand?: boolean }>()
+// hideTitle — в выезжающей панели заголовок «Фильтры» уже есть в её шапке
+const props = defineProps<{ filters: CatalogFilters; hideBrand?: boolean; hideTitle?: boolean }>()
 
 const { t } = useI18n()
 const catalog = useCatalogQuery()
@@ -61,13 +62,14 @@ function applyPrice() {
 <template>
   <div>
     <div class="flex items-center justify-between pb-2">
-      <h2 class="text-sm font-medium uppercase tracking-wider">{{ t('filters.title') }}</h2>
+      <h2 :class="props.hideTitle ? 'sr-only' : 'text-sm font-medium uppercase tracking-wider'">{{ t('filters.title') }}</h2>
       <UButton
         v-if="catalog.activeCount.value"
         :label="t('filters.reset')"
         variant="link"
         color="neutral"
         size="xs"
+        class="ml-auto"
         @click="catalog.reset()"
       />
     </div>

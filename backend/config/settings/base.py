@@ -4,6 +4,7 @@ from pathlib import Path
 
 import environ
 from celery.schedules import crontab
+from django.templatetags.static import static
 from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import pgettext_lazy
@@ -229,6 +230,8 @@ UNFOLD = {
     "SITE_SYMBOL": "watch",
     "SHOW_LANGUAGES": True,
     "SHOW_HISTORY": True,
+    # Открывает вкладку языка с ошибкой (modeltranslation не видит ошибки в разметке Unfold)
+    "SCRIPTS": [lambda request: static("core/js/translation-tab-errors.js")],
     "SIDEBAR": {
         "show_search": True,
         "show_all_applications": False,

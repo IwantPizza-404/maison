@@ -89,6 +89,31 @@ docker run --rm caddy:2.10-alpine caddy hash-password --plaintext 'пароль'
 ./scripts/deploy.sh   # git pull → сборка → миграции → перезапуск → поисковый индекс
 ```
 
+### Автодеплой (CI/CD)
+
+`.github/workflows/ci.yml`: на каждый push и pull request — линтеры, тесты, сборка фронтенда
+и Docker-образов. После зелёного CI в `main` джоба `deploy` заходит на сервер по SSH
+и запускает `./scripts/deploy.sh`. Пока секреты не заданы, деплой пропускается.
+
+Ключ GitHub ограничен на сервере одной командой — даже утёкший ключ не даёт доступа к серверу.
+
+1. Отдельный ключ (на своём компьютере, без пароля):
+   ```bash
+   ssh-keygen -t ed25519 -N "" -C "github-actions-deploy" -f ~/.ssh/maison_deploy
+   ```
+2. На сервере — публичный ключ в `/root/.ssh/authorized_keys` **одной строкой** с ограничением:
+   ```
+   command="cd /opt/maison && ./scripts/deploy.sh",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty ssh-ed25519 AAAA… github-actions-deploy
+   ```
+3. Проверка с компьютера: `ssh -i ~/.ssh/maison_deploy root@IP` — должен запуститься деплой.
+4. GitHub → репозиторий → Settings → Secrets and variables → Actions → New repository secret:
+   - `DEPLOY_HOST` — IP или домен сервера;
+   - `DEPLOY_SSH_KEY` — содержимое `~/.ssh/maison_deploy` (приватный ключ целиком);
+   - `DEPLOY_KNOWN_HOSTS` — вывод `ssh-keyscan -t ed25519 IP`;
+   - `DEPLOY_USER` — если не `root` (необязательно).
+
+Ход деплоя — во вкладке Actions репозитория. Ручной `./scripts/deploy.sh` на сервере работает как раньше.
+
 ## Полезные команды
 
 ```bash

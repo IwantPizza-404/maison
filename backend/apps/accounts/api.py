@@ -15,7 +15,7 @@ from apps.core import telegram
 from apps.orders.models import Order, OrderItem
 from apps.orders.schemas import ErrorOut
 
-from . import bot, sms
+from . import bot, sms, whatsapp
 from .auth import COOKIE_NAME, customer_auth, set_session_cookie
 from .models import (
     Address,
@@ -45,7 +45,7 @@ from .schemas import (
     WatchRequestIn,
     WatchRequestOut,
 )
-from .services import LoginError, complete_login, start_sms_login
+from .services import LoginError, complete_login, start_sms_login, start_whatsapp_login
 
 logger = logging.getLogger(__name__)
 
@@ -62,6 +62,7 @@ def auth_methods(request):
     return {
         "telegram": telegram.is_configured() and bool(settings.TELEGRAM_BOT_USERNAME),
         "sms": sms.is_enabled(),
+        "whatsapp": whatsapp.is_enabled(),
     }
 
 
@@ -83,6 +84,20 @@ def telegram_start(request):
 def sms_start(request, payload: SmsStartIn):
     try:
         return {"token": start_sms_login(payload.phone)}
+    except LoginError as exc:
+        return Status(400, {"detail": str(exc)})
+
+
+@auth_router.post(
+    "/whatsapp/start",
+    response={200: TokenOut, 400: ErrorOut},
+    throttle=[AnonRateThrottle("5/h")],
+)
+def whatsapp_start(request, payload: SmsStartIn):
+    if not whatsapp.is_enabled():
+        return Status(400, {"detail": "WhatsApp login is not configured."})
+    try:
+        return {"token": start_whatsapp_login(payload.phone)}
     except LoginError as exc:
         return Status(400, {"detail": str(exc)})
 

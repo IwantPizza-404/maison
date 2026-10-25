@@ -444,6 +444,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/auth/whatsapp/start": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Whatsapp Start */
+        post: operations["apps_accounts_api_whatsapp_start"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/auth/verify": {
         parameters: {
             query?: never;
@@ -1321,6 +1338,8 @@ export interface components {
             telegram: boolean;
             /** Sms */
             sms: boolean;
+            /** Whatsapp */
+            whatsapp: boolean;
         };
         /** TelegramStartOut */
         TelegramStartOut: {
@@ -2103,6 +2122,39 @@ export interface operations {
         };
     };
     apps_accounts_api_sms_start: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SmsStartIn"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TokenOut"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorOut"];
+                };
+            };
+        };
+    };
+    apps_accounts_api_whatsapp_start: {
         parameters: {
             query?: never;
             header?: never;

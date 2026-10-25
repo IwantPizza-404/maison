@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 import type { components } from '~/types/api'
 
-export const CURRENCIES = ['USD', 'UZS', 'EUR', 'RUB'] as const
-export type Currency = (typeof CURRENCIES)[number]
+// Код валюты (ISO): список валют задаётся в админке и приходит вместе с курсами
+export type Currency = string
 
 /**
  * Выбранная валюта отображения и курсы относительно USD.
@@ -14,8 +14,9 @@ export const useCurrencyStore = defineStore('currency', () => {
     maxAge: 60 * 60 * 24 * 365,
   })
 
-  // Сколько единиц валюты за 1 USD
-  const rates = ref<Partial<Record<Currency, number>>>({ USD: 1 })
+  // Сколько единиц валюты за 1 USD — в порядке, заданном в админке
+  const rates = ref<Record<Currency, number>>({ USD: 1 })
+  const codes = computed(() => Object.keys(rates.value))
 
   async function load() {
     try {
@@ -37,5 +38,5 @@ export const useCurrencyStore = defineStore('currency', () => {
     return amountUsd * (rates.value[current.value] ?? 1)
   }
 
-  return { current, rates, set, convert, load }
+  return { current, rates, codes, set, convert, load }
 })

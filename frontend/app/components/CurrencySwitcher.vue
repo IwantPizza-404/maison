@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CURRENCIES, type Currency, useCurrencyStore } from '~/stores/currency'
+import { type Currency, useCurrencyStore } from '~/stores/currency'
 
 const { t } = useI18n()
 const currency = useCurrencyStore()
@@ -13,7 +13,7 @@ const model = computed({
 <template>
   <USelect
     v-model="model"
-    :items="[...CURRENCIES]"
+    :items="currency.codes"
     :aria-label="t('currency')"
     variant="none"
     size="sm"

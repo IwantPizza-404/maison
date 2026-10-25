@@ -52,31 +52,41 @@ def fetch_cbu_rates(timeout: float = 15) -> tuple[dict[str, Decimal], date | Non
 
 @transaction.atomic
 def update_rates() -> list[str]:
-    """Обновляет курсы валют отображения (кроме базовой). Возвращает обновлённые коды."""
+    """Обновляет официальные курсы валют из админки. Возвращает обновлённые коды.
+
+    Валюты, которых нет у ЦБ, не трогаем — у них ручной курс.
+    """
     rates, rate_date = fetch_cbu_rates()
     updated = []
-    for code in settings.DISPLAY_CURRENCIES:
-        if code == settings.BASE_CURRENCY:
+    for item in ExchangeRate.objects.exclude(currency=settings.BASE_CURRENCY):
+        if item.currency not in rates:
             continue
-        if code not in rates:
-            logger.warning("No CBU rate for %s", code)
-            continue
-        ExchangeRate.objects.update_or_create(
-            currency=code,
-            defaults={"rate": rates[code].quantize(Decimal("0.000001")), "rate_date": rate_date},
-        )
-        updated.append(code)
+        item.rate = rates[item.currency].quantize(Decimal("0.000001"))
+        item.rate_date = rate_date
+        item.save(update_fields=["rate", "rate_date", "updated_at"])
+        updated.append(item.currency)
     cache.delete(RATES_CACHE_KEY)
     logger.info("Exchange rates updated: %s", ", ".join(updated))
     return updated
 
 
+def official_rate(code: str) -> tuple[Decimal, date | None] | None:
+    """Курс ЦБ для одной валюты — при добавлении валюты в админке. None — ЦБ её не публикует."""
+    rates, rate_date = fetch_cbu_rates()
+    if code not in rates:
+        return None
+    return rates[code].quantize(Decimal("0.000001")), rate_date
+
+
 def current_rates() -> dict[str, Decimal]:
-    """Действующие курсы для витрины (с ручными курсами и наценкой). Кэшируются."""
+    """Действующие курсы для витрины — включённые валюты в порядке из админки,
+    с ручными курсами и наценкой. Кэшируются."""
     rates = cache.get(RATES_CACHE_KEY)
     if rates is None:
         rates = {settings.BASE_CURRENCY: Decimal(1)}
-        for item in ExchangeRate.objects.filter(currency__in=settings.DISPLAY_CURRENCIES):
-            rates[item.currency] = item.effective_rate
+        for item in ExchangeRate.objects.filter(is_active=True):
+            effective = item.effective_rate
+            if effective is not None:
+                rates[item.currency] = effective
         cache.set(RATES_CACHE_KEY, rates, 60 * 10)
     return rates

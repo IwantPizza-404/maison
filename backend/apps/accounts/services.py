@@ -1,15 +1,18 @@
-"""Вход покупателей и привязка гостевых заказов."""
+"""Вход покупателей, привязка гостевых заказов, выгрузка покупателей в Excel."""
 
 import logging
 
 from django.core.cache import cache
-from django.db import transaction
+from django.db import models, transaction
+from django.db.models import Count, Q, QuerySet, Sum
 from django.utils import timezone
 from django.utils.translation import gettext as _
+from django.utils.translation import pgettext
 
+from apps.core.excel import table
 from apps.orders.models import Order
 
-from . import sms
+from . import sms, whatsapp
 from .models import Customer, LoginRequest, normalize_phone
 
 logger = logging.getLogger(__name__)
@@ -23,16 +26,35 @@ SMS_PER_PHONE_PER_HOUR = 3
 
 
 def start_sms_login(phone: str) -> str:
+    return start_phone_login(LoginRequest.Method.SMS, phone)
+
+
+def start_whatsapp_login(phone: str) -> str:
+    return start_phone_login(LoginRequest.Method.WHATSAPP, phone)
+
+
+def start_phone_login(method: str, phone: str) -> str:
+    """Код на номер телефона — в SMS или WhatsApp. Возвращает токен попытки входа."""
     phone = normalize_phone(phone)
     if len(phone) < 11:
         raise LoginError(_("Enter a phone number in international format."))
-    # Лимит на номер (не только на IP): SMS платные, их нельзя рассылать на чужой номер с разных IP
-    key = f"sms-login:{phone}"
+    # Лимит на номер (не только на IP): сообщения платные, их нельзя рассылать
+    # на чужой номер с разных IP
+    key = f"{method}-login:{phone}"
     cache.add(key, 0, 60 * 60)
     if cache.incr(key) > SMS_PER_PHONE_PER_HOUR:
         raise LoginError(_("Too many codes for this number. Try again in an hour."))
-    request, token = LoginRequest.create(LoginRequest.Method.SMS, phone=phone)
+    request, token = LoginRequest.create(method, phone=phone)
     code = request.issue_code()
+    if method == LoginRequest.Method.WHATSAPP:
+        try:
+            whatsapp.send_code(phone, code)
+        except whatsapp.WhatsAppError as exc:
+            logger.error("WhatsApp sending failed: %s", exc)
+            raise LoginError(
+                _("Could not send the code to WhatsApp. Try another login method.")
+            ) from exc
+        return token
     try:
         sms.send(phone, _("Maison login code: %(code)s") % {"code": code})
     except sms.SmsError as exc:
@@ -64,7 +86,7 @@ def _finish_login(request: LoginRequest) -> Customer:
 
 
 def find_or_create_customer(phone: str, telegram_id: int | None) -> Customer:
-    """Телефон подтверждён (Telegram-контакт или SMS) — это один и тот же человек."""
+    """Телефон подтверждён (Telegram-контакт, SMS или WhatsApp) — это один и тот же человек."""
     by_telegram = Customer.objects.filter(telegram_id=telegram_id).first() if telegram_id else None
     by_phone = Customer.objects.filter(phone=phone).first()
 
@@ -95,3 +117,64 @@ def link_guest_orders(customer: Customer) -> int:
     return Order.objects.filter(customer__isnull=True, phone_normalized=customer.phone).update(
         customer=customer
     )
+
+
+# --- Экспорт ---------------------------------------------------------------------
+
+
+def export_customers(queryset: QuerySet[Customer]) -> bytes:
+    """Покупатели в Excel: контакты, настройки и сводка по заказам (без отменённых)."""
+    customers = (
+        queryset.annotate(
+            orders_count=Count("orders", filter=~Q(orders__status=Order.Status.CANCELLED)),
+            orders_total=Sum("orders__total", filter=~Q(orders__status=Order.Status.CANCELLED)),
+        )
+        .prefetch_related("addresses")
+        .order_by("-created_at")
+    )
+
+    def label(name: str) -> str:
+        model_field = Customer._meta.get_field(name)
+        assert isinstance(model_field, models.Field)
+        text = str(model_field.verbose_name)
+        return text[:1].upper() + text[1:]  # capitalize() сделал бы «telegram» строчным
+
+    def local(value):
+        # Excel не умеет даты с часовым поясом — пишем местное время
+        return timezone.localtime(value).replace(tzinfo=None) if value else None
+
+    headers = [
+        label("phone"),
+        # «name» у товара переводится как «Название» — у покупателя это имя
+        pgettext("person", "Name"),
+        label("email"),
+        "Telegram",
+        label("language"),
+        label("currency"),
+        label("notify_telegram"),
+        label("created_at"),
+        label("last_login_at"),
+        _("Orders"),
+        _("Orders total, USD"),
+        _("Address"),
+    ]
+    rows = (
+        [
+            customer.phone,
+            customer.name,
+            customer.email,
+            f"@{customer.telegram_username}" if customer.telegram_username else "",
+            customer.language,
+            customer.currency,
+            _("yes") if customer.notify_telegram else _("no"),
+            local(customer.created_at),
+            local(customer.last_login_at),
+            customer.orders_count,  # type: ignore[attr-defined]
+            customer.orders_total or 0,  # type: ignore[attr-defined]
+            str(customer.addresses.all()[0]) if customer.addresses.all() else "",
+        ]
+        for customer in customers
+    )
+    widths = [18, 22, 26, 18, 10, 10, 14, 18, 18, 10, 16, 40]
+    title = str(Customer._meta.verbose_name_plural)
+    return table(title[:1].upper() + title[1:], headers, rows, widths)

@@ -106,7 +106,7 @@ def test_inactive_delivery_method_is_rejected(watch):
 
 
 def test_order_snapshots_exchange_rate(watch):
-    ExchangeRate.objects.create(currency="UZS", rate=Decimal("12000"))
+    ExchangeRate.objects.update_or_create(currency="UZS", defaults={"rate": Decimal("12000")})
 
     created = order({"watch": 1}, currency="UZS")
 

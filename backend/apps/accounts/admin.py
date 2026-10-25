@@ -1,15 +1,18 @@
 from django.contrib import admin
-from django.http import HttpRequest
+from django.db.models import QuerySet
+from django.http import HttpRequest, HttpResponse
 from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from unfold.admin import ModelAdmin, TabularInline
 from unfold.contrib.filters.admin import ChoicesDropdownFilter
-from unfold.decorators import display
+from unfold.decorators import action, display
 
+from apps.core.excel import xlsx_response
 from apps.orders.models import Order
 
 from .models import Address, Customer, StockAlert, WatchRequest, WishlistItem
+from .services import export_customers
 
 
 def new_requests_badge(request: HttpRequest) -> int | None:
@@ -78,6 +81,8 @@ class CustomerAdmin(ModelAdmin):
         ("created_at", "last_login_at"),
     )
     inlines = (OrderInline, WatchRequestInline, WishlistInline, AlertInline, AddressInline)
+    actions = ("export_selected",)
+    actions_list = ("export_all",)
 
     def has_add_permission(self, request: HttpRequest) -> bool:
         # Покупатели регистрируются сами — через вход на сайте
@@ -92,6 +97,14 @@ class CustomerAdmin(ModelAdmin):
     @display(description=_("orders"))
     def orders_count(self, obj: Customer) -> int:
         return obj.orders.count()
+
+    @action(description=_("Export"), url_path="export", permissions=["view"])
+    def export_all(self, request: HttpRequest) -> HttpResponse:
+        return xlsx_response(export_customers(Customer.objects.all()), "maison-customers")
+
+    @action(description=_("Export selected to Excel"))
+    def export_selected(self, request: HttpRequest, queryset: QuerySet[Customer]) -> HttpResponse:
+        return xlsx_response(export_customers(queryset), "maison-customers")
 
 
 WATCH_REQUEST_COLORS = {

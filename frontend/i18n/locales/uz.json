@@ -182,7 +182,7 @@
   },
   "login": {
     "title": "Kirish",
-    "subtitle": "Parolsiz — Telegram orqali yoki SMS kod bilan.",
+    "subtitle": "Parolsiz — Telegram, WhatsApp orqali yoki SMS kod bilan.",
     "unavailable": "Kirish vaqtincha mavjud emas.",
     "error": "Xatolik yuz berdi. Qayta urinib ko‘ring.",
     "submit": "Kirish",
@@ -198,6 +198,9 @@
     "sms": {
       "send": "Kod olish",
       "codeHint": "SMS’dagi 6 xonali kodni kiriting."
+    },
+    "whatsapp": {
+      "codeHint": "WhatsApp’ga kelgan 6 xonali kodni kiriting."
     }
   },
   "account": {

@@ -11,10 +11,11 @@ const auth = useAuthStore()
 const wishlist = useWishlistStore()
 
 const { data: methods } = await useAsyncData('auth-methods', () => api<AuthMethods>('/auth/methods'), {
-  default: () => ({ telegram: false, sms: false }),
+  default: () => ({ telegram: false, sms: false, whatsapp: false }),
 })
 
-type Method = 'telegram' | 'sms'
+// SMS и WhatsApp — вход по номеру телефона: одинаковая форма, разный канал доставки кода
+type Method = 'telegram' | 'sms' | 'whatsapp'
 const method = ref<Method>('telegram')
 const step = ref<'start' | 'code'>('start')
 const token = ref<string | null>(null)
@@ -43,11 +44,11 @@ async function prepareTelegram() {
   }
 }
 
-async function sendSms() {
+async function sendCode() {
   loading.value = true
   error.value = null
   try {
-    const data = await api<{ token: string }>('/auth/sms/start', { method: 'POST', body: { phone: phone.value } })
+    const data = await api<{ token: string }>(`/auth/${method.value}/start`, { method: 'POST', body: { phone: phone.value } })
     token.value = data.token
     step.value = 'code'
   } catch (e) {
@@ -87,14 +88,17 @@ function switchMethod(value: Method) {
 
 onMounted(() => {
   if (auth.isLoggedIn) return navigateTo(localePath('/account'))
-  if (!methods.value.telegram && methods.value.sms) method.value = 'sms'
+  if (!methods.value.telegram) method.value = methods.value.whatsapp ? 'whatsapp' : 'sms'
   if (method.value === 'telegram' && methods.value.telegram) prepareTelegram()
 })
 
 const tabs = computed(() => [
   ...(methods.value.telegram ? [{ label: 'Telegram', value: 'telegram', icon: 'i-simple-icons-telegram' }] : []),
+  ...(methods.value.whatsapp ? [{ label: 'WhatsApp', value: 'whatsapp', icon: 'i-simple-icons-whatsapp' }] : []),
   ...(methods.value.sms ? [{ label: 'SMS', value: 'sms', icon: 'i-lucide-message-square' }] : []),
 ])
+
+const codeHint = computed(() => t(`login.${method.value}.codeHint`))
 
 useSeoMeta({ title: () => t('login.title'), robots: 'noindex' })
 </script>
@@ -147,8 +151,8 @@ useSeoMeta({ title: () => t('login.title'), robots: 'noindex' })
           />
         </template>
 
-        <!-- Шаг 1: SMS — номер телефона -->
-        <form v-if="method === 'sms' && step === 'start'" class="space-y-4" @submit.prevent="sendSms">
+        <!-- Шаг 1: SMS или WhatsApp — номер телефона -->
+        <form v-if="method !== 'telegram' && step === 'start'" class="space-y-4" @submit.prevent="sendCode">
           <UFormField :label="t('checkout.phone')">
             <UInput v-model="phone" type="tel" autocomplete="tel" placeholder="+998 90 123 45 67" size="xl" class="w-full" />
           </UFormField>
@@ -157,7 +161,7 @@ useSeoMeta({ title: () => t('login.title'), robots: 'noindex' })
 
         <!-- Шаг 2: код -->
         <form v-if="step === 'code'" class="space-y-5" @submit.prevent="verify">
-          <p class="text-sm text-muted">{{ method === 'telegram' ? t('login.telegram.codeHint') : t('login.sms.codeHint') }}</p>
+          <p class="text-sm text-muted">{{ codeHint }}</p>
           <UPinInput
             v-model="code"
             :length="6"

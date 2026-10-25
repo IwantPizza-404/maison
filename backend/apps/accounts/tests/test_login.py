@@ -1,7 +1,8 @@
+import httpx
 import pytest
 from django.core.cache import cache
 
-from apps.accounts import sms
+from apps.accounts import sms, whatsapp
 from apps.accounts.bot import process_update
 from apps.accounts.models import Customer, normalize_phone
 from apps.orders.services import Customer as OrderCustomer
@@ -154,13 +155,18 @@ def test_sms_login(client, settings, monkeypatch):
 def test_sms_disabled_and_methods(client, settings):
     settings.ESKIZ_EMAIL = ""
     settings.TELEGRAM_BOT_TOKEN = ""
+    settings.WHATSAPP_TOKEN = ""
 
     response = client.post(
         "/api/v1/auth/sms/start", {"phone": "+998901234567"}, content_type="application/json"
     )
 
     assert response.status_code == 400
-    assert client.get("/api/v1/auth/methods").json() == {"telegram": False, "sms": False}
+    assert client.get("/api/v1/auth/methods").json() == {
+        "telegram": False,
+        "sms": False,
+        "whatsapp": False,
+    }
 
 
 def test_phone_moved_to_another_telegram(client, tg):
@@ -217,3 +223,57 @@ def test_sms_limit_per_phone(client, settings, monkeypatch):
 
     # Разные IP, один номер: четвёртая SMS за час не отправляется
     assert [start(f"10.0.0.{i}") for i in range(4)] == [200, 200, 200, 400]
+
+
+# --- WhatsApp --------------------------------------------------------------------
+
+
+@pytest.fixture
+def meta(settings, monkeypatch):
+    """WhatsApp Cloud API: запоминаем запросы, отвечаем заданным статусом."""
+    settings.WHATSAPP_TOKEN, settings.WHATSAPP_PHONE_NUMBER_ID = "meta-token", "1234567890"
+    calls: list[dict] = []
+    reply = {"status": 200}
+
+    def fake_post(url, json, headers, timeout):
+        calls.append({"url": url, "json": json, "headers": headers})
+        return httpx.Response(reply["status"], json={}, request=httpx.Request("POST", url))
+
+    monkeypatch.setattr(whatsapp.httpx, "post", fake_post)
+    return {"calls": calls, "reply": reply}
+
+
+def whatsapp_start(client, phone="+998 90 765 43 21"):
+    return client.post(
+        "/api/v1/auth/whatsapp/start", {"phone": phone}, content_type="application/json"
+    )
+
+
+def test_whatsapp_login(client, meta):
+    token = whatsapp_start(client).json()["token"]
+
+    call = meta["calls"][0]
+    template = call["json"]["template"]
+    code = template["components"][0]["parameters"][0]["text"]
+    assert call["url"].endswith("/1234567890/messages")
+    assert call["headers"]["Authorization"] == "Bearer meta-token"
+    assert call["json"]["to"] == "998907654321"
+    assert template["name"] == "login_code"
+    assert template["components"][1]["parameters"][0]["text"] == code  # кнопка «Скопировать код»
+    assert verify(client, token, code).json()["phone"] == "+998907654321"
+    assert client.get("/api/v1/auth/methods").json()["whatsapp"] is True
+
+
+def test_whatsapp_error_is_shown(client, meta):
+    meta["reply"]["status"] = 400
+
+    response = whatsapp_start(client)
+
+    assert response.status_code == 400
+    assert "WhatsApp" in response.json()["detail"]
+
+
+def test_whatsapp_disabled(client, settings):
+    settings.WHATSAPP_TOKEN = ""
+
+    assert whatsapp_start(client).status_code == 400

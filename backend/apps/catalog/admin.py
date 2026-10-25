@@ -6,7 +6,6 @@ from django.db.models import QuerySet
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.urls import reverse
-from django.utils import timezone
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from modeltranslation.admin import TabbedTranslationAdmin, TranslationTabularInline
@@ -18,6 +17,8 @@ from unfold.contrib.filters.admin import (
 )
 from unfold.decorators import action, display
 
+from apps.core.excel import xlsx_response
+
 from .models import Brand, Category, Product, ProductImage, SpecOption, WatchSpecs
 from .services import (
     ImportFileError,
@@ -27,17 +28,9 @@ from .services import (
     unique_slug,
 )
 
-XLSX = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 IMPORT_MAX_SIZE = 5 * 1024 * 1024
 # Файл между проверкой и подтверждением импорта лежит в кэше
 IMPORT_CACHE_TTL = 30 * 60
-
-
-def xlsx_response(content: bytes, name: str) -> HttpResponse:
-    stamp = timezone.localdate().strftime("%Y-%m-%d")
-    response = HttpResponse(content, content_type=XLSX)
-    response["Content-Disposition"] = f'attachment; filename="{name}-{stamp}.xlsx"'
-    return response
 
 
 @admin.register(Brand)

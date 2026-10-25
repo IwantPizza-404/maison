@@ -182,7 +182,7 @@
   },
   "login": {
     "title": "Sign in",
-    "subtitle": "No password needed — sign in with Telegram or an SMS code.",
+    "subtitle": "No password needed — sign in with Telegram, WhatsApp or an SMS code.",
     "unavailable": "Sign-in is temporarily unavailable.",
     "error": "Something went wrong. Please try again.",
     "submit": "Sign in",
@@ -198,6 +198,9 @@
     "sms": {
       "send": "Get a code",
       "codeHint": "Enter the 6-digit code from the SMS."
+    },
+    "whatsapp": {
+      "codeHint": "Enter the 6-digit code we sent to WhatsApp."
     }
   },
   "account": {

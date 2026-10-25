@@ -122,7 +122,8 @@ class CustomerSession(models.Model):
 
 
 class LoginRequest(models.Model):
-    """Попытка входа: покупатель получает 6-значный код (в Telegram или SMS) и вводит его на сайте.
+    """Попытка входа: покупатель получает 6-значный код (в Telegram, SMS или WhatsApp)
+    и вводит его на сайте.
 
     Код вводится в том браузере, где начат вход, — поэтому чужая ссылка на бота
     не даёт злоумышленнику войти в аккаунт жертвы.
@@ -131,6 +132,7 @@ class LoginRequest(models.Model):
     class Method(models.TextChoices):
         TELEGRAM = "telegram", "Telegram"
         SMS = "sms", "SMS"
+        WHATSAPP = "whatsapp", "WhatsApp"
 
     method = models.CharField(max_length=16, choices=Method.choices)
     token_hash = models.CharField(max_length=64, unique=True)

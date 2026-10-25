@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useAuthStore } from '~/stores/auth'
-import { CURRENCIES, type Currency, useCurrencyStore } from '~/stores/currency'
+import { type Currency, useCurrencyStore } from '~/stores/currency'
 import type { Address, AddressPayload, AuthCustomer, CheckoutOptions } from '~/types/catalog'
 
 const { t, locale, locales, setLocale } = useI18n()
@@ -90,7 +90,7 @@ useSeoMeta({ title: () => t('account.nav.profile') })
           <USelect v-model="profile.language" :items="languageItems" class="w-full" />
         </UFormField>
         <UFormField :label="t('currency')">
-          <USelect v-model="profile.currency" :items="[...CURRENCIES]" class="w-full" />
+          <USelect v-model="profile.currency" :items="currency.codes" class="w-full" />
         </UFormField>
         <UFormField v-if="auth.customer?.has_telegram" class="sm:col-span-2">
           <USwitch v-model="profile.notify_telegram" :label="t('account.profile.notify')" :description="t('account.profile.notifyHint')" color="neutral" />

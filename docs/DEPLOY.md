@@ -51,6 +51,23 @@ HTTPS-сертификат Caddy получает сам при первом з�
 
 Локально бот работает без вебхука: `make bot` (long polling).
 
+### Вход через WhatsApp (необязательно)
+
+Код входа отправляется через WhatsApp Cloud API (Meta). Пока ключи не заданы, способ на сайте не показывается.
+
+1. [developers.facebook.com](https://developers.facebook.com) → создать приложение типа Business → добавить продукт WhatsApp.
+2. Подключить номер магазина (WhatsApp → API Setup) и пройти верификацию бизнеса в Meta Business Manager —
+   без неё сообщения уходят только на тестовые номера.
+3. WhatsApp Manager → Message templates → создать шаблон категории **Authentication**
+   (с кнопкой «Скопировать код»), имя `login_code`, язык Russian. Дождаться одобрения.
+4. Постоянный токен: Business Settings → System users → создать пользователя с правами на WhatsApp →
+   Generate token (`whatsapp_business_messaging`).
+5. В `infra/.env.prod`: `WHATSAPP_TOKEN`, `WHATSAPP_PHONE_NUMBER_ID` (из API Setup), при другом имени или языке
+   шаблона — `WHATSAPP_TEMPLATE`, `WHATSAPP_TEMPLATE_LANGUAGE`. Затем `./scripts/deploy.sh`.
+
+Сообщения-авторизации в WhatsApp платные (тариф Meta зависит от страны получателя);
+лимит — 3 кода в час на номер.
+
 ### Тестовый сервер (staging)
 
 В `infra/.env.prod`: `DOMAIN=dev.maison.uz`, `CADDYFILE=Caddyfile.staging`, `NUXT_INDEXABLE=false`,

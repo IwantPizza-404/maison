@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 01:16+0500\n"
+"POT-Creation-Date: 2026-10-25 21:26+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,33 +17,41 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: apps/accounts/admin.py:39 apps/accounts/admin.py:92
+#: apps/accounts/admin.py:42 apps/accounts/admin.py:97
 #: apps/orders/models.py:144
 msgid "orders"
 msgstr "заказы"
 
-#: apps/accounts/admin.py:41 apps/orders/models.py:143
+#: apps/accounts/admin.py:44 apps/orders/models.py:143
 msgid "order"
 msgstr "заказ"
 
-#: apps/accounts/admin.py:63 apps/accounts/models.py:304
+#: apps/accounts/admin.py:66 apps/accounts/models.py:306
 msgid "watch request"
 msgstr "заявка на поиск"
 
-#: apps/accounts/admin.py:123
+#: apps/accounts/admin.py:101 apps/catalog/admin.py:223
+msgid "Export"
+msgstr "Экспорт"
+
+#: apps/accounts/admin.py:105 apps/catalog/admin.py:219
+msgid "Export selected to Excel"
+msgstr "Экспорт выбранных в Excel"
+
+#: apps/accounts/admin.py:136
 msgid "Request"
 msgstr "Заявка"
 
-#: apps/accounts/admin.py:133
+#: apps/accounts/admin.py:146
 msgid "Reply"
 msgstr "Ответ"
 
-#: apps/accounts/admin.py:139 apps/accounts/models.py:293
+#: apps/accounts/admin.py:152 apps/accounts/models.py:295
 #: apps/orders/admin.py:328 apps/orders/models.py:93
 msgid "status"
 msgstr "статус"
 
-#: apps/accounts/apps.py:8 config/settings/base.py:306
+#: apps/accounts/apps.py:8 config/settings/base.py:312
 msgid "Customers"
 msgstr "Покупатели"
 
@@ -109,7 +117,7 @@ msgstr "email"
 msgid "language"
 msgstr "язык"
 
-#: apps/accounts/models.py:42 apps/currency/models.py:15
+#: apps/accounts/models.py:42 apps/currency/models.py:18
 msgid "currency"
 msgstr "валюта"
 
@@ -129,7 +137,7 @@ msgstr "зарегистрирован"
 msgid "last login"
 msgstr "последний вход"
 
-#: apps/accounts/models.py:52 apps/accounts/models.py:278
+#: apps/accounts/models.py:52 apps/accounts/models.py:280
 #: apps/orders/models.py:98
 msgid "customer"
 msgstr "покупатель"
@@ -169,123 +177,123 @@ msgstr "сессия"
 msgid "sessions"
 msgstr "сессии"
 
-#: apps/accounts/models.py:146
+#: apps/accounts/models.py:148
 msgid "login request"
 msgstr "попытка входа"
 
-#: apps/accounts/models.py:147
+#: apps/accounts/models.py:149
 msgid "login requests"
 msgstr "попытки входа"
 
-#: apps/accounts/models.py:201
+#: apps/accounts/models.py:203
 msgid "favourite"
 msgstr "избранное"
 
-#: apps/accounts/models.py:202
+#: apps/accounts/models.py:204
 msgid "favourites"
 msgstr "избранное"
 
-#: apps/accounts/models.py:218 apps/catalog/models.py:188
+#: apps/accounts/models.py:220 apps/catalog/models.py:188
 #: apps/catalog/models.py:240 apps/catalog/models.py:319
 #: apps/orders/models.py:188
 msgid "product"
 msgstr "товар"
 
-#: apps/accounts/models.py:226 apps/accounts/models.py:282
+#: apps/accounts/models.py:228 apps/accounts/models.py:284
 #: apps/catalog/models.py:40 apps/catalog/models.py:132
 #: apps/content/models.py:105 apps/orders/models.py:193
 msgid "brand"
 msgstr "бренд"
 
-#: apps/accounts/models.py:232 apps/catalog/models.py:36
+#: apps/accounts/models.py:234 apps/catalog/models.py:36
 #: apps/catalog/models.py:61 apps/content/models.py:97
 #: apps/orders/models.py:42
 msgid "active"
 msgstr "активен"
 
-#: apps/accounts/models.py:233 apps/accounts/models.py:300
+#: apps/accounts/models.py:235 apps/accounts/models.py:302
 #: apps/core/models.py:8
 msgid "created at"
 msgstr "создан"
 
-#: apps/accounts/models.py:234
+#: apps/accounts/models.py:236
 msgid "last notification"
 msgstr "последнее уведомление"
 
-#: apps/accounts/models.py:237
+#: apps/accounts/models.py:239
 msgid "stock alert"
 msgstr "подписка на поступление"
 
-#: apps/accounts/models.py:238
+#: apps/accounts/models.py:240
 msgid "stock alerts"
 msgstr "подписки на поступление"
 
-#: apps/accounts/models.py:266
+#: apps/accounts/models.py:268
 msgctxt "watch request"
 msgid "New"
 msgstr "Новая"
 
-#: apps/accounts/models.py:267
+#: apps/accounts/models.py:269
 msgid "Searching"
 msgstr "Ищем"
 
-#: apps/accounts/models.py:268
+#: apps/accounts/models.py:270
 msgid "Offer sent"
 msgstr "Предложение отправлено"
 
-#: apps/accounts/models.py:269
+#: apps/accounts/models.py:271
 msgid "Closed"
 msgstr "Закрыта"
 
-#: apps/accounts/models.py:272
+#: apps/accounts/models.py:274
 msgid "Any"
 msgstr "Любое"
 
-#: apps/accounts/models.py:273
+#: apps/accounts/models.py:275
 msgctxt "watch condition"
 msgid "New"
 msgstr "Новые"
 
-#: apps/accounts/models.py:274 apps/catalog/models.py:116
+#: apps/accounts/models.py:276 apps/catalog/models.py:116
 #: apps/content/models.py:88
 msgid "Pre-owned"
 msgstr "Pre-owned"
 
-#: apps/accounts/models.py:283
+#: apps/accounts/models.py:285
 msgid "model"
 msgstr "модель"
 
-#: apps/accounts/models.py:284 apps/catalog/models.py:137
+#: apps/accounts/models.py:286 apps/catalog/models.py:137
 #: apps/orders/models.py:195
 msgid "reference"
 msgstr "референс"
 
-#: apps/accounts/models.py:286 apps/catalog/models.py:158
+#: apps/accounts/models.py:288 apps/catalog/models.py:158
 msgid "condition"
 msgstr "состояние"
 
-#: apps/accounts/models.py:289
+#: apps/accounts/models.py:291
 msgid "budget, USD"
 msgstr "бюджет, USD"
 
-#: apps/accounts/models.py:291 apps/orders/models.py:115
+#: apps/accounts/models.py:293 apps/orders/models.py:115
 msgid "comment"
 msgstr "комментарий"
 
-#: apps/accounts/models.py:296
+#: apps/accounts/models.py:298
 msgid "reply to customer"
 msgstr "ответ покупателю"
 
-#: apps/accounts/models.py:298
+#: apps/accounts/models.py:300
 msgid "Visible to the customer and sent to Telegram."
 msgstr "Покупатель увидит ответ в кабинете и в Telegram."
 
-#: apps/accounts/models.py:301 apps/content/models.py:207
-#: apps/core/models.py:9 apps/currency/models.py:41
+#: apps/accounts/models.py:303 apps/content/models.py:207
+#: apps/core/models.py:9 apps/currency/models.py:55
 msgid "updated at"
 msgstr "изменён"
 
-#: apps/accounts/models.py:305
+#: apps/accounts/models.py:307
 msgid "watch requests"
 msgstr "заявки на поиск"
 
@@ -355,141 +363,163 @@ msgstr "Новости по вашей заявке %(watch)s: <b>%(status)s</b>
 msgid "Open account"
 msgstr "Открыть кабинет"
 
-#: apps/accounts/services.py:28 apps/orders/models.py:17
+#: apps/accounts/services.py:40 apps/orders/models.py:17
 msgid "Enter a phone number in international format."
 msgstr "Введите телефон в международном формате."
 
-#: apps/accounts/services.py:33
+#: apps/accounts/services.py:46
 msgid "Too many codes for this number. Try again in an hour."
 msgstr "Слишком много кодов для этого номера. Попробуйте через час."
 
-#: apps/accounts/services.py:37
+#: apps/accounts/services.py:55
+msgid "Could not send the code to WhatsApp. Try another login method."
+msgstr "Не удалось отправить код в WhatsApp. Попробуйте другой способ входа."
+
+#: apps/accounts/services.py:59
 #, python-format
 msgid "Maison login code: %(code)s"
 msgstr "Код для входа в Maison: %(code)s"
 
-#: apps/accounts/services.py:40
+#: apps/accounts/services.py:62
 msgid "Could not send SMS. Try logging in with Telegram."
 msgstr "Не удалось отправить SMS. Попробуйте войти через Telegram."
 
-#: apps/accounts/services.py:47
+#: apps/accounts/services.py:69
 msgid "The code has expired. Please start again."
 msgstr "Код устарел. Начните вход заново."
 
-#: apps/accounts/services.py:51
+#: apps/accounts/services.py:73
 msgid "Wrong code."
 msgstr "Неверный код."
 
-#: apps/catalog/admin.py:52 apps/catalog/models.py:189
+#: apps/accounts/services.py:149
+msgctxt "person"
+msgid "Name"
+msgstr "Имя"
+
+#: apps/accounts/services.py:157 apps/orders/apps.py:8
+#: config/settings/base.py:299
+msgid "Orders"
+msgstr "Заказы"
+
+#: apps/accounts/services.py:158
+msgid "Orders total, USD"
+msgstr "Сумма заказов, USD"
+
+#: apps/accounts/services.py:159
+msgid "Address"
+msgstr "Адрес"
+
+#: apps/accounts/services.py:169 apps/catalog/services.py:299
+msgid "yes"
+msgstr "да"
+
+#: apps/accounts/services.py:169
+msgid "no"
+msgstr "нет"
+
+#: apps/catalog/admin.py:45 apps/catalog/models.py:189
 #: apps/content/models.py:102
 msgid "products"
 msgstr "товары"
 
-#: apps/catalog/admin.py:84
+#: apps/catalog/admin.py:77
 msgid "Movement"
 msgstr "Механизм"
 
-#: apps/catalog/admin.py:86
+#: apps/catalog/admin.py:79
 msgid "Case"
 msgstr "Корпус"
 
-#: apps/catalog/admin.py:94
+#: apps/catalog/admin.py:87
 msgid "Dial & strap"
 msgstr "Циферблат и ремешок"
 
-#: apps/catalog/admin.py:96
+#: apps/catalog/admin.py:89
 msgid "Set & provenance"
 msgstr "Комплект и происхождение"
 
-#: apps/catalog/admin.py:110
+#: apps/catalog/admin.py:103
 msgid "preview"
 msgstr "превью"
 
-#: apps/catalog/admin.py:152
+#: apps/catalog/admin.py:145
 msgid "Price"
 msgstr "Цена"
 
-#: apps/catalog/admin.py:154
+#: apps/catalog/admin.py:147
 msgid "Availability"
 msgstr "Наличие"
 
-#: apps/catalog/admin.py:157
+#: apps/catalog/admin.py:150
 msgid "Attributes"
 msgstr "Характеристики"
 
-#: apps/catalog/admin.py:158 apps/content/admin.py:102
+#: apps/catalog/admin.py:151 apps/content/admin.py:102
 msgid "Publishing"
 msgstr "Публикация"
 
-#: apps/catalog/admin.py:160
+#: apps/catalog/admin.py:153
 msgid "SEO"
 msgstr "SEO"
 
-#: apps/catalog/admin.py:173
+#: apps/catalog/admin.py:166
 msgid "Leave empty — it is built from the brand and the English name."
 msgstr "Оставьте пустым — соберётся из бренда и английского названия."
 
-#: apps/catalog/admin.py:196 apps/catalog/models.py:165
+#: apps/catalog/admin.py:189 apps/catalog/models.py:165
 msgid "availability"
 msgstr "наличие"
 
-#: apps/catalog/admin.py:206
+#: apps/catalog/admin.py:199
 msgid "Publish selected"
 msgstr "Опубликовать выбранные"
 
-#: apps/catalog/admin.py:214
+#: apps/catalog/admin.py:207
 #, python-format
 msgid "Published: %d"
 msgstr "Опубликовано: %d"
 
-#: apps/catalog/admin.py:216
+#: apps/catalog/admin.py:209
 msgid "Unpublish selected"
 msgstr "Снять с публикации"
 
-#: apps/catalog/admin.py:219
+#: apps/catalog/admin.py:212
 #, python-format
 msgid "Unpublished: %d"
 msgstr "Снято с публикации: %d"
 
-#: apps/catalog/admin.py:226
-msgid "Export selected to Excel"
-msgstr "Экспорт выбранных в Excel"
-
-#: apps/catalog/admin.py:230
-msgid "Export"
-msgstr "Экспорт"
-
-#: apps/catalog/admin.py:234
+#: apps/catalog/admin.py:227
 msgid "Import template"
 msgstr "Шаблон импорта"
 
-#: apps/catalog/admin.py:238
+#: apps/catalog/admin.py:231
 #: apps/catalog/templates/admin/catalog/product/import.html:110
 msgid "Import"
 msgstr "Импорт"
 
-#: apps/catalog/admin.py:244
+#: apps/catalog/admin.py:237
 msgid "Import products"
 msgstr "Импорт товаров"
 
-#: apps/catalog/admin.py:252
+#: apps/catalog/admin.py:245
 msgid "The check has expired, upload the file again."
 msgstr "Проверка устарела, загрузите файл ещё раз."
 
-#: apps/catalog/admin.py:260
+#: apps/catalog/admin.py:253
 #, python-format
 msgid "Import finished: %(created)d created, %(updated)d updated."
 msgstr "Импорт завершён: создано %(created)d, обновлено %(updated)d."
 
-#: apps/catalog/admin.py:269
+#: apps/catalog/admin.py:262
 msgid "Choose a file."
 msgstr "Выберите файл."
 
-#: apps/catalog/admin.py:271
+#: apps/catalog/admin.py:264
 msgid "The file is too large (max 5 MB)."
 msgstr "Файл слишком большой (максимум 5 МБ)."
 
-#: apps/catalog/apps.py:8 config/settings/base.py:240
+#: apps/catalog/apps.py:8 config/settings/base.py:246
 msgid "Catalog"
 msgstr "Каталог"
 
@@ -519,7 +549,7 @@ msgstr "Другие написания для поиска через запя�
 #: apps/catalog/models.py:94 apps/catalog/models.py:329
 #: apps/content/models.py:98 apps/content/models.py:177
 #: apps/content/models.py:205 apps/content/models.py:226
-#: apps/orders/models.py:43
+#: apps/currency/models.py:53 apps/orders/models.py:43
 msgid "position"
 msgstr "позиция"
 
@@ -902,10 +932,6 @@ msgstr "Значения"
 msgid "from the list, slug or name"
 msgstr "из списка, slug или название"
 
-#: apps/catalog/services.py:299
-msgid "yes"
-msgstr "да"
-
 #: apps/catalog/services.py:379
 msgid "Could not read the file. Upload an .xlsx file."
 msgstr "Не удалось прочитать файл. Загрузите файл .xlsx."
@@ -1104,7 +1130,7 @@ msgstr "Соцсети"
 msgid "Announcement bar"
 msgstr "Строка объявления"
 
-#: apps/content/admin.py:73 config/settings/base.py:243
+#: apps/content/admin.py:73 config/settings/base.py:249
 msgid "Products"
 msgstr "Товары"
 
@@ -1112,7 +1138,7 @@ msgstr "Товары"
 msgid "Banner"
 msgstr "Баннер"
 
-#: apps/content/apps.py:8 config/settings/base.py:265
+#: apps/content/apps.py:8 config/settings/base.py:271
 msgid "Content"
 msgstr "Контент"
 
@@ -1168,7 +1194,7 @@ msgstr "ссылка объявления"
 msgid "site settings"
 msgstr "настройки сайта"
 
-#: apps/content/models.py:59 config/settings/base.py:283
+#: apps/content/models.py:59 config/settings/base.py:289
 msgid "Site settings"
 msgstr "Настройки сайта"
 
@@ -1361,7 +1387,7 @@ msgstr "вопрос"
 msgid "answer"
 msgstr "ответ"
 
-#: apps/content/models.py:230 config/settings/base.py:278
+#: apps/content/models.py:230 config/settings/base.py:284
 msgid "FAQ"
 msgstr "Частые вопросы"
 
@@ -1370,20 +1396,20 @@ msgstr "Частые вопросы"
 msgid "Image must be smaller than %(mb)s MB."
 msgstr "Размер изображения должен быть меньше %(mb)s МБ."
 
-#: apps/currency/admin.py:24
+#: apps/currency/admin.py:72
 msgid "effective rate"
 msgstr "действующий курс"
 
-#: apps/currency/admin.py:28
+#: apps/currency/admin.py:80
 msgid "Update from Central Bank"
 msgstr "Обновить из ЦБ"
 
-#: apps/currency/admin.py:33
+#: apps/currency/admin.py:85
 #, python-format
 msgid "Rates updated: %s"
 msgstr "Курсы обновлены: %s"
 
-#: apps/currency/admin.py:36
+#: apps/currency/admin.py:88
 #, python-format
 msgid "Could not load rates: %s"
 msgstr "Не удалось загрузить курсы: %s"
@@ -1392,41 +1418,67 @@ msgstr "Не удалось загрузить курсы: %s"
 msgid "Currencies"
 msgstr "Валюты"
 
-#: apps/currency/models.py:17
+#: apps/currency/models.py:21
+msgid "Three-letter ISO code, e.g. AED."
+msgstr "Трёхбуквенный код ISO, например AED."
+
+#: apps/currency/models.py:22
+msgid "Three-letter ISO code: EUR, RUB, AED, KZT…"
+msgstr "Трёхбуквенный код ISO: EUR, RUB, AED, KZT…"
+
+#: apps/currency/models.py:25
 msgid "official rate"
 msgstr "официальный курс"
 
-#: apps/currency/models.py:21
+#: apps/currency/models.py:31
 msgid "Units of currency per 1 USD, updated automatically."
 msgstr "Единиц валюты за 1 USD, обновляется автоматически."
 
-#: apps/currency/models.py:24
+#: apps/currency/models.py:34
 msgid "manual rate"
 msgstr "ручной курс"
 
-#: apps/currency/models.py:30
+#: apps/currency/models.py:40
 msgid "If set, used instead of the official rate."
 msgstr "Если указан, используется вместо официального."
 
-#: apps/currency/models.py:33
+#: apps/currency/models.py:43
 msgid "markup, %"
 msgstr "наценка, %"
 
-#: apps/currency/models.py:38
+#: apps/currency/models.py:48
 msgid "Added to the rate, e.g. to cover conversion costs."
 msgstr "Добавляется к курсу, например чтобы покрыть расходы на конвертацию."
 
-#: apps/currency/models.py:40
+#: apps/currency/models.py:51
+msgid "shown on the site"
+msgstr "показывать на сайте"
+
+#: apps/currency/models.py:51
+msgid "Available in the currency switcher."
+msgstr "Доступна в переключателе валют на сайте."
+
+#: apps/currency/models.py:54
 msgid "rate date"
 msgstr "дата курса"
 
-#: apps/currency/models.py:44 apps/orders/models.py:130
+#: apps/currency/models.py:58 apps/orders/models.py:130
 msgid "exchange rate"
 msgstr "курс валюты"
 
-#: apps/currency/models.py:45
+#: apps/currency/models.py:59
 msgid "exchange rates"
 msgstr "курсы валют"
+
+#: apps/currency/models.py:69
+#, python-format
+msgid "%(code)s is the base currency."
+msgstr "%(code)s — базовая валюта, её курс всегда 1."
+
+#: apps/currency/models.py:75
+msgid ""
+"The Central Bank does not publish this currency — set the rate manually."
+msgstr "ЦБ не публикует курс этой валюты — укажите курс вручную."
 
 #: apps/orders/admin.py:60
 msgid "by manager"
@@ -1473,7 +1525,7 @@ msgstr "Отменить заказ? Товары из наличия верну
 msgid "Order %(number)s: %(status)s"
 msgstr "Заказ %(number)s: %(status)s"
 
-#: apps/orders/admin.py:284 config/settings/base.py:300
+#: apps/orders/admin.py:284 config/settings/base.py:306
 msgid "Order board"
 msgstr "Доска заказов"
 
@@ -1504,10 +1556,6 @@ msgstr "написать покупателю"
 #: apps/orders/admin.py:349
 msgid "Call"
 msgstr "Позвонить"
-
-#: apps/orders/apps.py:8 config/settings/base.py:293
-msgid "Orders"
-msgstr "Заказы"
 
 #: apps/orders/models.py:25
 msgid "Pickup"
@@ -1678,82 +1726,82 @@ msgstr "Узбекский"
 msgid "Russian"
 msgstr "Русский"
 
-#: config/settings/base.py:248
+#: config/settings/base.py:254
 msgid "Brands"
 msgstr "Бренды"
 
-#: config/settings/base.py:253
+#: config/settings/base.py:259
 msgid "Categories"
 msgstr "Категории"
 
-#: config/settings/base.py:258
+#: config/settings/base.py:264
 msgid "Specification options"
 msgstr "Справочник характеристик"
 
-#: config/settings/base.py:268
+#: config/settings/base.py:274
 msgid "Home page"
 msgstr "Главная страница"
 
-#: config/settings/base.py:273
+#: config/settings/base.py:279
 msgid "Pages"
 msgstr "Страницы"
 
-#: config/settings/base.py:290
+#: config/settings/base.py:296
 msgid "Sales"
 msgstr "Продажи"
 
-#: config/settings/base.py:311
+#: config/settings/base.py:317
 msgid "Watch requests"
 msgstr "Заявки на поиск часов"
 
-#: config/settings/base.py:319
+#: config/settings/base.py:325
 msgid "Settings"
 msgstr "Настройки"
 
-#: config/settings/base.py:322
+#: config/settings/base.py:328
 msgid "Delivery methods"
 msgstr "Способы доставки"
 
-#: config/settings/base.py:327
+#: config/settings/base.py:333
 msgid "Exchange rates"
 msgstr "Курсы валют"
 
-#: config/settings/base.py:334
+#: config/settings/base.py:340
 msgid "Users & access"
 msgstr "Пользователи и доступ"
 
-#: config/settings/base.py:337
+#: config/settings/base.py:343
 msgid "Users"
 msgstr "Пользователи"
 
-#: config/settings/base.py:342
+#: config/settings/base.py:348
 msgid "Groups"
 msgstr "Группы"
 
-#: config/settings/base.py:355
+#: config/settings/base.py:361
 msgid "Board"
 msgstr "Доска"
 
-#: config/settings/base.py:357
+#: config/settings/base.py:363
 msgid "All orders"
 msgstr "Все заказы"
 
-#: config/settings/base.py:369
+#: config/settings/base.py:375
 msgctxt "orders tab"
 msgid "New"
 msgstr "Новые"
 
-#: config/settings/base.py:370
+#: config/settings/base.py:376
 msgctxt "orders tab"
 msgid "Confirmed"
 msgstr "Подтверждённые"
 
-#: config/settings/base.py:371
+#: config/settings/base.py:377
 msgctxt "orders tab"
 msgid "Paid"
 msgstr "Оплаченные"
 
-#: config/settings/base.py:372
+#: config/settings/base.py:378
 msgctxt "orders tab"
 msgid "Shipped"
 msgstr "Отправленные"

@@ -11,6 +11,7 @@ from apps.orders.schemas import SUPPORTED_LANGUAGES
 class AuthMethodsOut(Schema):
     telegram: bool
     sms: bool
+    whatsapp: bool
 
 
 class TelegramStartOut(Schema):

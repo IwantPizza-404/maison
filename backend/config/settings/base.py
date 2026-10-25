@@ -135,7 +135,6 @@ USE_TZ = True
 
 # Цены хранятся в базовой валюте; остальные — пересчёт по курсу для отображения.
 BASE_CURRENCY = "USD"
-DISPLAY_CURRENCIES = ["USD", "UZS", "EUR", "RUB"]
 
 # --- Статика и медиа ---------------------------------------------------------
 
@@ -204,6 +203,13 @@ TELEGRAM_WEBHOOK_SECRET = env("TELEGRAM_WEBHOOK_SECRET", default="")
 ESKIZ_EMAIL = env("ESKIZ_EMAIL", default="")
 ESKIZ_PASSWORD = env("ESKIZ_PASSWORD", default="")
 ESKIZ_SENDER = env("ESKIZ_SENDER", default="4546")
+
+# Вход по коду в WhatsApp (WhatsApp Cloud API, Meta) — включается, если заданы токен и номер
+WHATSAPP_TOKEN = env("WHATSAPP_TOKEN", default="")
+WHATSAPP_PHONE_NUMBER_ID = env("WHATSAPP_PHONE_NUMBER_ID", default="")
+WHATSAPP_TEMPLATE = env("WHATSAPP_TEMPLATE", default="login_code")
+WHATSAPP_TEMPLATE_LANGUAGE = env("WHATSAPP_TEMPLATE_LANGUAGE", default="ru")
+WHATSAPP_API_VERSION = env("WHATSAPP_API_VERSION", default="v22.0")
 
 MEILISEARCH_URL = env("MEILISEARCH_URL", default="http://localhost:7700")
 MEILISEARCH_API_KEY = env("MEILISEARCH_API_KEY", default="")

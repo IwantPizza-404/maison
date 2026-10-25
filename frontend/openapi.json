@@ -1044,6 +1044,48 @@
         }
       }
     },
+    "/api/v1/auth/whatsapp/start": {
+      "post": {
+        "operationId": "apps_accounts_api_whatsapp_start",
+        "summary": "Whatsapp Start",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenOut"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorOut"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SmsStartIn"
+              }
+            }
+          },
+          "required": true
+        }
+      }
+    },
     "/api/v1/auth/verify": {
       "post": {
         "operationId": "apps_accounts_api_verify",
@@ -3692,11 +3734,16 @@
           "sms": {
             "title": "Sms",
             "type": "boolean"
+          },
+          "whatsapp": {
+            "title": "Whatsapp",
+            "type": "boolean"
           }
         },
         "required": [
           "telegram",
-          "sms"
+          "sms",
+          "whatsapp"
         ],
         "title": "AuthMethodsOut",
         "type": "object"

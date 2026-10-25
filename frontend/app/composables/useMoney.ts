@@ -17,8 +17,9 @@ export function useMoney() {
     const formatted = new Intl.NumberFormat(LOCALE_FORMATS[locale.value] ?? 'en-US', {
       style: 'currency',
       currency: code,
-      // Цены часов показываем без копеек; сумы дополнительно округляем до тысяч
-      maximumFractionDigits: 0,
+      // Цены часов показываем без копеек; сумы дополнительно округляем до тысяч.
+      // Маленькие суммы (валюта с курсом меньше единицы) — с копейками, иначе было бы «0»
+      maximumFractionDigits: Math.abs(value) < 100 ? 2 : 0,
     }).format(code === 'UZS' ? Math.round(value / 1000) * 1000 : value)
     // В русской локали Intl не знает сокращения для сума
     return locale.value === 'ru' ? formatted.replace('UZS', 'сум') : formatted

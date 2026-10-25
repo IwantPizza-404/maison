@@ -52,6 +52,14 @@ export default defineNuxtConfig({
   app: {
     head: {
       titleTemplate: '%s · Maison',
+      // Значок: SVG для современных браузеров, ICO — для старых, PNG — для iOS и Android
+      link: [
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+        { rel: 'icon', href: '/favicon.ico', sizes: '48x48' },
+        { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
+        { rel: 'manifest', href: '/site.webmanifest' },
+      ],
+      meta: [{ name: 'theme-color', content: '#0d0d0d' }],
     },
   },
 
